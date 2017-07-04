@@ -8,7 +8,8 @@ class Peleador(pygame.sprite.Sprite):
         self.imagen=imagen
         self.rect=self.imagen.get_rect()
         self.rect.top,self.rect.left=(100,200)
-    def mover(self,vx,vy):
-       pass
-    def update(self,superficie):
-        superficie.blit(self.imagen,self.rect)
+    def mover(self, vx, vy):
+        self.rect.move_ip(vx, vy)
+
+    def update(self, superficie):
+        superficie.blit(self.imagen, self.rect)

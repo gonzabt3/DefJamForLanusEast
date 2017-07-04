@@ -1,33 +1,86 @@
 import pygame
 
-# importo el modulo
+class Peleador(pygame.sprite.Sprite):
+    def __init__(self,imagen):
+        #self.nombre=nombre
+        #self.vida=vida
+        #self.golpe=golpe
+        self.imagen=imagen
+        self.rect=self.imagen.get_rect()
+        self.rect.top,self.rect.left=(100,200)
+    def mover(self, vx, vy):
+        self.rect.move_ip(vx, vy)
 
-# funcion main
+    def update(self, superficie):
+        superficie.blit(self.imagen, self.rect)
+
+
+
 def main():
-    pygame.init()  # inicializo el modulo
-    # fijo las dimensiones de la pantalla a 300,300 y creo una superficie que va ser la principal
-    pantalla = pygame.display.set_mode((500,500))
-    pygame.display.set_caption("VS")  # Titulo de la Ventana
-    # creo un reloj para controlar los fps
-    reloj1 = pygame.time.Clock()
-    blanco = (255, 255, 255)  # color blanco en RGB
+
+
+    pygame.init()
+    pantalla = pygame.display.set_mode((480, 300))
     salir = False
-    # LOOP PRINCIPAL
-    while salir != True:
-        # recorro todos los eventos producidos
-        # en realidad es una lista
+    reloj1 = pygame.time.Clock()
+    imagen1 = pygame.image.load("imagenes/cody/cody.png").convert_alpha()
+    player1 = Peleador(imagen1)
+    vx, vy = 0, 0
+    velocidad = 10
+    leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada = False, False, False, False
+
+    while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
-            # si el evento es del tipo
-            # pygame.QUIT( cruz de la ventana)
             if event.type == pygame.QUIT:
                 salir = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    leftsigueapretada = True
+                    vx = -velocidad
+                if event.key == pygame.K_RIGHT:
+                    rightsigueapretada = True
+                    vx = velocidad
+                if event.key == pygame.K_UP:
+                    upsigueapretada = True
+                    vy = -velocidad
+                if event.key == pygame.K_DOWN:
+                    downsigueapretada = True
+                    vy = velocidad
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    leftsigueapretada = False
+                    if rightsigueapretada:
+                        vx = velocidad
+                    else:
+                        vx = 0
+                if event.key == pygame.K_RIGHT:
+                    rightsigueapretada = False
+                    if leftsigueapretada:
+                        vx = -velocidad
+                    else:
+                        vx = 0
+                if event.key == pygame.K_UP:
+                    upsigueapretada = False
+                    if downsigueapretada:
+                        vy = velocidad
+                    else:
+                        vy = -0
+                if event.key == pygame.K_DOWN:
+                    downsigueapretada = False
+                    if upsigueapretada:
+                        vy = -velocidad
+                    else:
+                        vy = 0
 
-        reloj1.tick(20)  # operacion para que todo corra a 20fps
-        pantalla.fill(blanco)  # pinto la superficie de blanco
-
-        pygame.display.update()  # actualizo el display
+        reloj1.tick(20)
+        player1.mover(vx, vy)
+        pantalla.fill((200, 200, 200))
+        player1.update(pantalla)
+        pygame.display.update()
 
     pygame.quit()
 
 
 main()
+
+
