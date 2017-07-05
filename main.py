@@ -1,13 +1,14 @@
 import pygame
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,imagen1,imagen2,imagen3):
+    def __init__(self,imagen1,imagen2,imagen3,imagenGolpe):
         #self.nombre=nombre
         #self.vida=vida
         #self.golpe=golpe
         self.imagen1=imagen1
         self.imagen2=imagen2
         self.imagen3=imagen3
+        self.imagenGolpe=imagenGolpe
         self.imagenes = [self.imagen1, self.imagen2,self.imagen3]
         self.imagenActual=0
         self.imagen=self.imagenes[self.imagenActual]
@@ -18,7 +19,7 @@ class Peleador(pygame.sprite.Sprite):
     def mover(self, vx, vy): #metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
 
-    def update(self, superficie,vx,vy,t):
+    def update(self, superficie,vx,vy,t,spacesigueapretada):
         if(vx==0 and vy==0):
             self.move=False #me fijo si se esta moviendo
         else:
@@ -32,6 +33,7 @@ class Peleador(pygame.sprite.Sprite):
         self.imagen=self.imagenes[self.imagenActual]
         superficie.blit(self.imagen, self.rect)
 
+        self.pegarGolpe(spacesigueapretada,superficie)
 
     def nextimage(self):#cambio de imagen:
         self.imagenActual += 1
@@ -39,6 +41,13 @@ class Peleador(pygame.sprite.Sprite):
         if self.imagenActual > (len(self.imagenes) - 1):  # si se fue de rango que lo ponga en 0
             self.imagenActual = 0
 
+    def pegarGolpe(self,spacesigueapretada,superficie):#pegar golpe
+
+        if(spacesigueapretada==True):
+            self.imagen=self.imagenGolpe
+            superficie.blit(self.imagen,self.rect)
+            print "pegar"
+        
 
 
 def main():
@@ -52,12 +61,12 @@ def main():
     imagen1 = pygame.image.load("imagenes/cody/cody_pelea1.png").convert_alpha()
     imagen2  = pygame.image.load("imagenes/cody/cody_pelea2.png").convert_alpha()
     imagen3 = pygame.image.load("imagenes/cody/cody_pelea3.png").convert_alpha()
-
-    player1 = Peleador(imagen1,imagen2,imagen3)
+    imagenGolpe = pygame.image.load("imagenes/cody/cody_puno.png").convert_alpha()
+    player1 = Peleador(imagen1,imagen2,imagen3,imagenGolpe)
     vx, vy = 0, 0
     velocidad = 7
     t = 0
-    leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada = False, False, False, False
+    leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada,spacesigueapretada = False, False, False, False,False
 
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
@@ -76,6 +85,9 @@ def main():
                 if event.key == pygame.K_DOWN:
                     downsigueapretada = True
                     vy = velocidad
+                if event.key == pygame.K_SPACE:
+                    spacesigueapretada = True
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     leftsigueapretada = False
@@ -101,6 +113,9 @@ def main():
                         vy = -velocidad
                     else:
                         vy = 0
+                if event.key == pygame.K_SPACE:
+                    spacesigueapretada=False
+
 
         reloj1.tick(25)
         # auxiliar de la animacion
@@ -111,7 +126,7 @@ def main():
 
 
         pantalla.fill((200, 200, 200))
-        player1.update(pantalla, vx, vy, t)
+        player1.update(pantalla, vx, vy, t,spacesigueapretada)
         pygame.display.update()
 
     pygame.quit()
