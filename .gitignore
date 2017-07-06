@@ -1,5 +1,6 @@
-/.idea/*
-.idea/*
-.idea
-idea/*
-idea
+
+
+.idea/misc.xml
+.idea/prueba.iml
+.idea/workspace.xml
+

@@ -31,9 +31,10 @@ class Peleador(pygame.sprite.Sprite):
 
         self.mover(vx, vy)
         self.imagen=self.imagenes[self.imagenActual]
-        superficie.blit(self.imagen, self.rect)
 
-        self.pegarGolpe(spacesigueapretada,superficie)
+
+        if not(self.pegarGolpe(spacesigueapretada,superficie)): #sino pega imprime al chabon caminando
+            superficie.blit(self.imagen, self.rect)
 
     def nextimage(self):#cambio de imagen:
         self.imagenActual += 1
