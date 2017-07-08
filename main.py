@@ -16,13 +16,13 @@ class Peleador(pygame.sprite.Sprite):
         self.rect.move_ip(vx, vy)
 
     def update(self, superficie,vx,vy,fightMove,spacesigueapretada):
-        if(fightMove==True):
-            if (spacesigueapretada == True):
+        if(fightMove==True): #PREGUNTO SI hay un movimiento de pelea
+            if (spacesigueapretada == True): #punio1
                 self.punio1(superficie)
-        elif(vx==0 and vy==0):
+        elif(vx==0 and vy==0): #si la velocida esta en 0 no se mueve
             self.move=False #me fijo si se esta moviendo
             self.estarQuieto(superficie)
-        else:
+        else: #si la velocidad no esta en 0 se mueve
                 self.move = True
                 self.mover(vx, vy)
                 self.moverse(superficie)
