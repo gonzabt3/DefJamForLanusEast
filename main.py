@@ -1,10 +1,11 @@
 import pygame
 from threading import Timer
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,imagenesQuieto,imagenesMovimiento):
+    def __init__(self,imagenesQuieto,imagenesMovimiento,imagenesPunio1):
 
         self.imagenesMovimiento=imagenesMovimiento
         self.imagenesQuieto=imagenesQuieto
+        self.imagenesPunio1=imagenesPunio1
         self.imagenActual=0
         self.imagen=self.imagenesQuieto[self.imagenActual]
         self.rect=self.imagen   .get_rect()
@@ -14,14 +15,17 @@ class Peleador(pygame.sprite.Sprite):
     def mover(self, vx, vy): #metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
 
-    def update(self, superficie,vx,vy):
-        if(vx==0 and vy==0):
+    def update(self, superficie,vx,vy,fightMove,spacesigueapretada):
+        if(fightMove==True):
+            if (spacesigueapretada == True):
+                self.punio1(superficie)
+        elif(vx==0 and vy==0):
             self.move=False #me fijo si se esta moviendo
             self.estarQuieto(superficie)
         else:
-            self.move=True
-            self.mover(vx,vy)
-            self.moverse(superficie)
+                self.move = True
+                self.mover(vx, vy)
+                self.moverse(superficie)
 
     def estarQuieto(self,superficie): #funcion que anima al personaj cuando esta quieto
             self.nextImage(self.imagenesQuieto)
@@ -31,7 +35,9 @@ class Peleador(pygame.sprite.Sprite):
             self.nextImage(self.imagenesMovimiento)
             superficie.blit(self.imagenesMovimiento[self.imagenActual],self.rect)
     
-
+    def punio1(self,superficie):
+            self.nextImage(self.imagenesPunio1)
+            superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
 
     def nextImage(self,imagenesSec):#cambio de imagen:
         self.imagenActual += 1
@@ -78,12 +84,18 @@ def main():
     imagenMovimiento9 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento9.png").convert_alpha()
     imagenMovimientoArray =[imagenMovimiento1,imagenMovimiento2,imagenMovimiento3,imagenMovimiento4,imagenMovimiento5,imagenMovimiento6,imagenMovimiento7,imagenMovimiento8,imagenMovimiento9]
 
-    player1 = Peleador(imagenParadoArray,imagenMovimientoArray)
+    #imagenes chabon punio1
+    imagenPunio1 = pygame.image.load("imagenes/zub_zero/punio1/punio1.png").convert_alpha()
+    imagenPunio2= pygame.image.load("imagenes/zub_zero/punio1/punio2.png").convert_alpha()
+    imagenPunio3 = pygame.image.load("imagenes/zub_zero/punio1/punio3.png").convert_alpha()
+    imagenPunioArray=[imagenPunio1,imagenPunio2,imagenPunio3]
+
+    player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray)
     vx, vy = 0, 0
     velocidad = 7
     t = 0
     leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada,spacesigueapretada = False, False, False, False,False
-
+    fightMove=False
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -103,6 +115,7 @@ def main():
                     vy = velocidad
                 if event.key == pygame.K_SPACE:
                     spacesigueapretada = True
+                    fightMove=True
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
@@ -131,7 +144,7 @@ def main():
                         vy = 0
                 if event.key == pygame.K_SPACE:
                     spacesigueapretada=False
-
+                    fightMove = False
 
         reloj1.tick(18)
         # auxiliar de la animacion
@@ -142,7 +155,7 @@ def main():
 
 
         pantalla.fill((200, 200, 200))
-        player1.update(pantalla, vx, vy)
+        player1.update(pantalla, vx, vy,fightMove,spacesigueapretada)
         pygame.display.update()
 
     pygame.quit()
