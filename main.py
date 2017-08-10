@@ -35,9 +35,27 @@ class Peleador(pygame.sprite.Sprite):
             self.nextImage(self.imagenesMovimiento)
             superficie.blit(self.imagenesMovimiento[self.imagenActual],self.rect)
     
+    # def punio1(self,superficie):
+    #         self.nextImage(self.imagenesPunio1)
+    #         superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
+
     def punio1(self,superficie):
-            self.nextImage(self.imagenesPunio1)
+        for i in range(0, 3):
+            # print i
+            if self.imagenActual>len(self.imagenesPunio1):
+                self.imagenActual=0
+            self.nextImageLimitado(self.imagenesPunio1)
+            print self.imagenActual
             superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
+
+        
+
+    def nextImageLimitado(self,imagenesSec):
+
+        if(self.imagenActual<len(imagenesSec)-1):
+            self.imagenActual+=1
+
+
 
     def nextImage(self,imagenesSec):#cambio de imagen:
         self.imagenActual += 1
@@ -145,6 +163,7 @@ def main():
                 if event.key == pygame.K_SPACE:
                     spacesigueapretada=False
                     fightMove = False
+
 
         reloj1.tick(18)
         # auxiliar de la animacion
