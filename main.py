@@ -1,11 +1,12 @@
 import pygame
 from threading import Timer
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,imagenesQuieto,imagenesMovimiento,imagenesPunio1):
+    def __init__(self,imagenesQuieto,imagenesMovimiento,imagenesPunio1,imagenesPatada1):
 
         self.imagenesMovimiento=imagenesMovimiento
         self.imagenesQuieto=imagenesQuieto
         self.imagenesPunio1=imagenesPunio1
+        self.imagenesPatada1=imagenesPatada1
         self.imagenActual=0
         self.imagen=self.imagenesQuieto[self.imagenActual]
         self.rect=self.imagen   .get_rect()
@@ -15,10 +16,12 @@ class Peleador(pygame.sprite.Sprite):
     def mover(self, vx, vy): #metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
 
-    def update(self, superficie,vx,vy,fightMove,spacesigueapretada):
+    def update(self, superficie,vx,vy,fightMove,q_apretada,w_apretada):
         if(fightMove==True): #PREGUNTO SI hay un movimiento de pelea
-            if (spacesigueapretada == True): #punio1
+            if (q_apretada == True): #punio1
                 self.punio1(superficie)
+            if (w_apretada == True): #patada1
+                self.patada2(superficie)
         elif(vx==0 and vy==0): #si la velocida esta en 0 no se mueve
             self.move=False #me fijo si se esta moviendo
             self.estarQuieto(superficie)
@@ -51,6 +54,17 @@ class Peleador(pygame.sprite.Sprite):
             if self.imagenActual < len(self.imagenesPunio1):
                 superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
 
+    def patada2(self,superficie):
+        for i in range(0, 3):
+            # print i
+            if self.imagenActual>len(self.imagenesPatada1):
+                self.imagenActual=0
+            self.nextImageLimitado(self.imagenesPatada1)
+            print self.imagenActual
+            if self.imagenActual>len(self.imagenesPatada1):
+                self.imagenActual-1
+            if self.imagenActual < len(self.imagenesPatada1):
+                superficie.blit(self.imagenesPatada1[self.imagenActual],self.rect)
         
 
     def nextImageLimitado(self,imagenesSec):
@@ -111,11 +125,19 @@ def main():
     imagenPunio3 = pygame.image.load("imagenes/zub_zero/punio1/punio3.png").convert_alpha()
     imagenPunioArray=[imagenPunio1,imagenPunio2,imagenPunio3]
 
-    player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray)
+    #imagenes chabon patada1
+    imagenPatada1 = pygame.image.load("imagenes/zub_zero/patada/patada1.png").convert_alpha()
+    imagenPatada2 = pygame.image.load("imagenes/zub_zero/patada/patada2.png").convert_alpha()
+    imagenPatada3 = pygame.image.load("imagenes/zub_zero/patada/patada3.png").convert_alpha()
+    imagenPatada4 = pygame.image.load("imagenes/zub_zero/patada/patada4.png").convert_alpha()
+
+    imagenPatadaArray=[imagenPatada1,imagenPatada2,imagenPatada3,imagenPatada4]
+
+    player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray)
     vx, vy = 0, 0
     velocidad = 7
     t = 0
-    leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada,spacesigueapretada = False, False, False, False,False
+    leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada,q_apretada,w_apretada = False, False, False, False,False,False
     fightMove=False
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
@@ -134,8 +156,11 @@ def main():
                 if event.key == pygame.K_DOWN:
                     downsigueapretada = True
                     vy = velocidad
-                if event.key == pygame.K_SPACE:
-                    spacesigueapretada = True
+                if event.key == pygame.K_q:
+                    q_apretada = True
+                    fightMove=True
+                if event.key == pygame.K_w:
+                    w_apretada = True
                     fightMove=True
 
             if event.type == pygame.KEYUP:
@@ -163,10 +188,12 @@ def main():
                         vy = -velocidad
                     else:
                         vy = 0
-                if event.key == pygame.K_SPACE:
-                    spacesigueapretada=False
+                if event.key == pygame.K_q:
+                    q_apretada=False
                     fightMove = False
-
+                if event.key == pygame.K_w:
+                    w_apretada=False
+                    fightMove=False
 
         reloj1.tick(16)
         # auxiliar de la animacion
@@ -177,7 +204,7 @@ def main():
 
 
         pantalla.fill((200, 200, 200))
-        player1.update(pantalla, vx, vy,fightMove,spacesigueapretada)
+        player1.update(pantalla, vx, vy,fightMove,q_apretada,w_apretada)
         pygame.display.update()
 
     pygame.quit()
