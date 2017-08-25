@@ -46,7 +46,10 @@ class Peleador(pygame.sprite.Sprite):
                 self.imagenActual=0
             self.nextImageLimitado(self.imagenesPunio1)
             print self.imagenActual
-            superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
+            if self.imagenActual>len(self.imagenesPunio1):
+                self.imagenActual-1
+            if self.imagenActual < len(self.imagenesPunio1):
+                superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
 
         
 
@@ -165,7 +168,7 @@ def main():
                     fightMove = False
 
 
-        reloj1.tick(18)
+        reloj1.tick(16)
         # auxiliar de la animacion
       #  t += 1
        # if t > 1:
