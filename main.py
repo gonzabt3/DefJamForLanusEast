@@ -54,7 +54,12 @@ class Peleador(pygame.sprite.Sprite):
     def moverse(self,superficie):
             self.nextImage(self.imagenesMovimiento)
             superficie.blit(self.imagenesMovimiento[self.imagenActual],self.rect)
-    
+
+    def moverseAtras(self,superficie):
+            self.previusImage(self.imagenesMovimiento)
+            superficie.blit(self.imagenesMovimiento[self.imagenActual],self.rect)
+
+
     # def punio1(self,superficie):
     #         self.nextImage(self.imagenesPunio1)
     #         superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
