@@ -1,5 +1,16 @@
 import pygame
 from threading import Timer
+
+class Fondo(pygame.sprite.Sprite):
+    def __init__(self):
+        self.imagen=pygame.image.load("imagenes/fondo/enzoHause.gif").convert_alpha()
+        self.rect=self.imagen.get_rect()
+
+    def update(self,pantalla):
+        pantalla.blit(self.imagen,self.rect)
+
+
+
 class Peleador(pygame.sprite.Sprite):
     def __init__(self,imagenesQuieto,imagenesMovimiento,imagenesPunio1,imagenesPatada1,imagenesDefensa1):
 
@@ -11,7 +22,7 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenActual=0
         self.imagen=self.imagenesQuieto[self.imagenActual]
         self.rect=self.imagen.get_rect()
-        self.rect.top,self.rect.left=(100,200)
+        self.rect.top,self.rect.left=(250,100)
         self.move=False
         self.estado=0 # 0=inactivo,1=ataque,2=defensa,3=herido
     def mover(self, vx, vy): #metodo que mueve al c habon
@@ -150,6 +161,7 @@ def main():
 
 
     player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray,imagenDefensa1Array)
+    fondo1=Fondo()
     vx, vy = 0, 0
     velocidad = 7
     t = 0
@@ -167,12 +179,12 @@ def main():
                 if event.key == pygame.K_RIGHT:
                     rightsigueapretada = True
                     vx = velocidad
-                if event.key == pygame.K_UP:
-                    upsigueapretada = True
-                    vy = -velocidad
-                if event.key == pygame.K_DOWN:
-                    downsigueapretada = True
-                    vy = velocidad
+                # if event.key == pygame.K_UP:
+                #     upsigueapretada = True
+                #     vy = -velocidad
+                # if event.key == pygame.K_DOWN:
+                #     downsigueapretada = True
+                #     vy = velocidad
                 if event.key == pygame.K_q:
                     q_apretada = True
                     fightMove=True
@@ -196,18 +208,18 @@ def main():
                         vx = -velocidad
                     else:
                         vx = 0
-                if event.key == pygame.K_UP:
-                    upsigueapretada = False
-                    if downsigueapretada:
-                        vy = velocidad
-                    else:
-                        vy = -0
-                if event.key == pygame.K_DOWN:
-                    downsigueapretada = False
-                    if upsigueapretada:
-                        vy = -velocidad
-                    else:
-                        vy = 0
+                # if event.key == pygame.K_UP:
+                #     upsigueapretada = False
+                #     if downsigueapretada:
+                #         vy = velocidad
+                #     else:
+                #         vy = -0
+                # if event.key == pygame.K_DOWN:
+                #     downsigueapretada = False
+                #     if upsigueapretada:
+                #         vy = -velocidad
+                #     else:
+                #         vy = 0
                 if event.key == pygame.K_q:
                     q_apretada=False
                     fightMove = False
@@ -225,6 +237,7 @@ def main():
         #t = 0
 
         pantalla.fill((200, 200, 200))
+        fondo1.update(pantalla)
         player1.update(pantalla, vx, vy,fightMove,q_apretada,w_apretada,defenseMove,e_apretada)
         pygame.display.update()
 
