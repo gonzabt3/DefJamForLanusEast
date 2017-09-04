@@ -124,16 +124,16 @@ def main():
     reloj1 = pygame.time.Clock()
 
     #imagenes chabon parado
-    imagenParado1 = pygame.image.load("imagenes/zub_zero/parado/parado1.png").convert_alpha()
-    imagenParado2 = pygame.image.load("imagenes/zub_zero/parado/parado2.png").convert_alpha()
-    imagenParado3 = pygame.image.load("imagenes/zub_zero/parado/parado3.png").convert_alpha()
-    imagenParado4 = pygame.image.load("imagenes/zub_zero/parado/parado4.png").convert_alpha()
-    imagenParado5 = pygame.image.load("imagenes/zub_zero/parado/parado5.png").convert_alpha()
-    imagenParado6 = pygame.image.load("imagenes/zub_zero/parado/parado6.png").convert_alpha()
-    imagenParado7 = pygame.image.load("imagenes/zub_zero/parado/parado7.png").convert_alpha()
-    imagenParado8 = pygame.image.load("imagenes/zub_zero/parado/parado8.png").convert_alpha()
-    imagenParado9 = pygame.image.load("imagenes/zub_zero/parado/parado9.png").convert_alpha()
-    imagenParado10 = pygame.image.load("imagenes/zub_zero/parado/parado10.png").convert_alpha()
+    imagenParado1 = pygame.image.load("imagenes/fonte/parado/mov1s.png").convert_alpha()
+    imagenParado2 = pygame.image.load("imagenes/fonte/parado/mov2s.png").convert_alpha()
+    imagenParado3 = pygame.image.load("imagenes/fonte/parado/mov3s.png").convert_alpha()
+    imagenParado4 = pygame.image.load("imagenes/fonte/parado/mov4s.png").convert_alpha()
+    imagenParado5 = pygame.image.load("imagenes/fonte/parado/mov5s.png").convert_alpha()
+    imagenParado6 = pygame.image.load("imagenes/fonte/parado/mov6s.png").convert_alpha()
+    imagenParado7 = pygame.image.load("imagenes/fonte/parado/mov7s.png").convert_alpha()
+    imagenParado8 = pygame.image.load("imagenes/fonte/parado/mov8s.png").convert_alpha()
+    imagenParado9 = pygame.image.load("imagenes/fonte/parado/mov9s.png").convert_alpha()
+    imagenParado10 = pygame.image.load("imagenes/fonte/parado/mov10s.png").convert_alpha()
     imagenParadoArray =[imagenParado1,imagenParado2,imagenParado3,imagenParado4,imagenParado5,imagenParado6,imagenParado7,imagenParado8,imagenParado9,imagenParado10]
 
     #imagenes chabon movimietno
@@ -237,7 +237,7 @@ def main():
                     e_apretada=False
                     defenseMove=False
 
-        reloj1.tick(16)
+        reloj1.tick(12)
         #auxiliar de la animacion
         #t += 1
         #if t > 1:
