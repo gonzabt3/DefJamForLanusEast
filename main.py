@@ -10,18 +10,26 @@ class Fondo(pygame.sprite.Sprite):
         pantalla.blit(self.imagen,self.rect)
 
 class LifeBar(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,texto):
         self.marco=pygame.image.load("imagenes/lifebar/life_bar_marco.png").convert_alpha()
         self.relleno=pygame.image.load("imagenes/lifebar/life_bar_relleno.png").convert_alpha()
         self.pixelesBarra=228
+
         self.rect = self.marco.get_rect()
         self.rect.top, self.rect.left = (10, 10)
+
         self.rectRelleno=self.relleno.get_rect()
         self.rectRelleno.top,self.rectRelleno.left=(54,76)
+
+        self.texto=texto
+        self.textRect = self.marco.get_rect()
+        self.textRect.top, self.textRect.left = (60, 70)
+
 
     def update(self,pantalla):
         pantalla.blit(self.marco, self.rect)
         pantalla.blit(self.relleno, self.rectRelleno)
+        pantalla.blit(self.texto,self.textRect)
 
     def actualizarBar(self,damage):
         damagePixeles = (damage * self.pixelesBarra) / 100
@@ -45,6 +53,8 @@ class Peleador(pygame.sprite.Sprite):
         self.estado=0 # 0=inactivo,1=ataque,2=defensa,3=herido
         self.life=100
         self.lifeBar=lifeBar
+
+
 
     def mover(self, vx, vy): #metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
@@ -189,7 +199,10 @@ def main():
     imagenDefensa2 = pygame.image.load("imagenes/zub_zero/defensa/defensa2.png").convert_alpha()
     imagenDefensa1Array =[imagenDefensa1,imagenDefensa2]
 
-    lifeBar1 = LifeBar()
+    #texto
+    texto = pygame.image.load("imagenes/textoPablo.png").convert_alpha()
+
+    lifeBar1 = LifeBar(texto)
     player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray,imagenDefensa1Array,lifeBar1)
     fondo1=Fondo()
     vx, vy = 0, 0
