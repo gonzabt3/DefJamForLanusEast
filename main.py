@@ -9,11 +9,37 @@ class Fondo(pygame.sprite.Sprite):
     def update(self,pantalla):
         pantalla.blit(self.imagen,self.rect)
 
+class LifeBar(pygame.sprite.Sprite):
+    def __init__(self,texto):
+        self.marco=pygame.image.load("imagenes/lifebar/life_bar_marco.png").convert_alpha()
+        self.relleno=pygame.image.load("imagenes/lifebar/life_bar_relleno.png").convert_alpha()
+        self.pixelesBarra=228
 
+        self.rect = self.marco.get_rect()
+        self.rect.top, self.rect.left = (10, 10)
+
+        self.rectRelleno=self.relleno.get_rect()
+        self.rectRelleno.top,self.rectRelleno.left=(54,76)
+
+        self.texto=texto
+        self.textRect = self.marco.get_rect()
+        self.textRect.top, self.textRect.left = (60, 70)
+
+
+    def update(self,pantalla):
+        pantalla.blit(self.marco, self.rect)
+        pantalla.blit(self.relleno, self.rectRelleno)
+        pantalla.blit(self.texto,self.textRect)
+
+    def actualizarBar(self,damage):
+        damagePixeles = (damage * self.pixelesBarra) / 100
+        self.pixelesBarra = self.pixelesBarra - damagePixeles
+        self.relleno = pygame.transform.smoothscale(self.relleno, (self.pixelesBarra, 5))
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,imagenesQuieto,imagenesMovimiento,imagenesPunio1,imagenesPatada1,imagenesDefensa1):
+    def __init__(self,imagenesQuieto,imagenesMovimiento,imagenesPunio1,imagenesPatada1,imagenesDefensa1,lifeBar):
 
+        #atributos
         self.imagenesMovimiento=imagenesMovimiento
         self.imagenesQuieto=imagenesQuieto
         self.imagenesPunio1=imagenesPunio1
@@ -25,13 +51,19 @@ class Peleador(pygame.sprite.Sprite):
         self.rect.top,self.rect.left=(250,100)
         self.move=False
         self.estado=0 # 0=inactivo,1=ataque,2=defensa,3=herido
-    def mover(self, vx, vy): #metodo que mueve al c habon
+        self.life=100
+        self.lifeBar=lifeBar
+
+
+
+    def mover(self, vx, vy): #metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
 
-    def update(self, superficie,vx,vy,fightMove,q_apretada,w_apretada,defenseMove,e_apretada):
+    def update(self, superficie,vx,vy,fightMove,q_apretada,w_apretada,defenseMove,e_apretada,lifeBar1):
         if(fightMove==True): #PREGUNTO SI hay un movimiento de pelea
             if (q_apretada == True): #punio1
                 self.punio1(superficie)
+                self.lifeBar.actualizarBar(3)
             if (w_apretada == True): #patada1
                 self.patada2(superficie)
         elif (defenseMove == True):
@@ -67,6 +99,7 @@ class Peleador(pygame.sprite.Sprite):
     #         superficie.blit(self.imagenesPunio1[self.imagenActual],self.rect)
 
     def punio1(self,superficie):
+
         self.estado=1
         for i in range(0, 3):
             # print i
@@ -119,7 +152,7 @@ class Peleador(pygame.sprite.Sprite):
 def main():
 
     pygame.init()
-    pantalla = pygame.display.set_mode((600, 600))
+    pantalla = pygame.display.set_mode((600, 500))
     salir = False
     reloj1 = pygame.time.Clock()
 
@@ -166,8 +199,11 @@ def main():
     imagenDefensa2 = pygame.image.load("imagenes/zub_zero/defensa/defensa2.png").convert_alpha()
     imagenDefensa1Array =[imagenDefensa1,imagenDefensa2]
 
+    #texto
+    texto = pygame.image.load("imagenes/textoPablo.png").convert_alpha()
 
-    player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray,imagenDefensa1Array)
+    lifeBar1 = LifeBar(texto)
+    player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray,imagenDefensa1Array,lifeBar1)
     fondo1=Fondo()
     vx, vy = 0, 0
     velocidad = 7
@@ -245,7 +281,8 @@ def main():
 
         pantalla.fill((200, 200, 200))
         fondo1.update(pantalla)
-        player1.update(pantalla, vx, vy,fightMove,q_apretada,w_apretada,defenseMove,e_apretada)
+        lifeBar1.update(pantalla)
+        player1.update(pantalla, vx, vy,fightMove,q_apretada,w_apretada,defenseMove,e_apretada,lifeBar1)
         pygame.display.update()
 
     pygame.quit()
