@@ -182,25 +182,25 @@ def main():
     imagenMovimientoArray =[imagenMovimiento1,imagenMovimiento2,imagenMovimiento3,imagenMovimiento4,imagenMovimiento5,imagenMovimiento6,imagenMovimiento7,imagenMovimiento8,imagenMovimiento9]
 
     #imagenes chabon punio1
-    imagenPunio1 = pygame.image.load("imagenes/zub_zero/punio1/punio1.png").convert_alpha()
-    imagenPunio2= pygame.image.load("imagenes/zub_zero/punio1/punio2.png").convert_alpha()
-    imagenPunio3 = pygame.image.load("imagenes/zub_zero/punio1/punio3.png").convert_alpha()
+    imagenPunio1 = pygame.image.load("imagenes/fonte/punio1/punio1s.png").convert_alpha()
+    imagenPunio2= pygame.image.load("imagenes/fonte/punio1/punio2s.png").convert_alpha()
+    imagenPunio3 = pygame.image.load("imagenes/fonte/punio1/punio3s.png").convert_alpha()
     imagenPunioArray=[imagenPunio1,imagenPunio2,imagenPunio3]
 
     #imagenes chabon patada1
-    imagenPatada1 = pygame.image.load("imagenes/zub_zero/patada/patada1.png").convert_alpha()
-    imagenPatada2 = pygame.image.load("imagenes/zub_zero/patada/patada2.png").convert_alpha()
-    imagenPatada3 = pygame.image.load("imagenes/zub_zero/patada/patada3.png").convert_alpha()
-    imagenPatada4 = pygame.image.load("imagenes/zub_zero/patada/patada4.png").convert_alpha()
+    imagenPatada1 = pygame.image.load("imagenes/fonte/patada/patada1s.png").convert_alpha()
+    imagenPatada2 = pygame.image.load("imagenes/fonte/patada/patada2s.png").convert_alpha()
+    imagenPatada3 = pygame.image.load("imagenes/fonte/patada/patada3s.png").convert_alpha()
+    imagenPatada4 = pygame.image.load("imagenes/fonte/patada/patada4s.png").convert_alpha()
     imagenPatadaArray = [imagenPatada1, imagenPatada2, imagenPatada3, imagenPatada4]
 
     #imagenes chabon defensa1
-    imagenDefensa1 = pygame.image.load("imagenes/zub_zero/defensa/defensa1.png").convert_alpha()
-    imagenDefensa2 = pygame.image.load("imagenes/zub_zero/defensa/defensa2.png").convert_alpha()
+    imagenDefensa1 = pygame.image.load("imagenes/fonte/defensa/def1s.png").convert_alpha()
+    imagenDefensa2 = pygame.image.load("imagenes/fonte/defensa/def2s.png").convert_alpha()
     imagenDefensa1Array =[imagenDefensa1,imagenDefensa2]
 
     #texto
-    texto = pygame.image.load("imagenes/textoPablo.png").convert_alpha()
+    texto = pygame.image.load("imagenes/fonte/textoFonte.png").convert_alpha()
 
     lifeBar1 = LifeBar(texto)
     player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray,imagenDefensa1Array,lifeBar1)
