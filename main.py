@@ -10,7 +10,7 @@ from threading import Timer
 def main():
 
     pygame.init()
-    pantalla = pygame.display.set_mode((600, 500))
+    pantalla = pygame.display.set_mode((750, 500))
     salir = False
     reloj1 = pygame.time.Clock()
 
@@ -63,7 +63,7 @@ def main():
     #cabeza
     cabeza=pygame.image.load("imagenes/fonte/cabeza.png").convert_alpha()
 
-    lifeBar1 = LifeBar(texto,cabeza)
+    lifeBar1 = LifeBar(texto,cabeza,2)
     player1 = Peleador(imagenParadoArray,imagenMovimientoArray,imagenPunioArray,imagenPatadaArray,imagenDefensa1Array,lifeBar1)
     fondo1=Fondo()
     vx, vy = 0, 0
