@@ -2,7 +2,7 @@ import pygame
 
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1, lifeBar):
+    def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1, lifeBar,player):
 
         # atributos
         self.imagenesMovimiento = imagenesMovimiento
@@ -13,7 +13,10 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
-        self.rect.top, self.rect.left = (250, 100)
+        if(player==1):
+            self.rect.top, self.rect.left = (250, 100)
+        if(player==2):
+            self.rect.top, self.rect.left = (250, 550)
         self.move = False
         self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido
         self.life = 100

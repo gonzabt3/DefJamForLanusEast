@@ -5,6 +5,7 @@ from LifeBar import LifeBar
 from Fondo import Fondo
 from Peleador import Peleador
 import Fonte
+import subZero
 from threading import Timer
 
 
@@ -15,8 +16,16 @@ def main():
     salir = False
     reloj1 = pygame.time.Clock()
 
-    lifeBar1 = LifeBar(Fonte.texto,Fonte.cabeza,1)
-    player1 = Peleador(Fonte.imagenParadoArray,Fonte.imagenMovimientoArray,Fonte.imagenPunioArray,Fonte.imagenPatadaArray,Fonte.imagenDefensa1Array,lifeBar1)
+
+    Jugador1=Fonte
+    Jugador2=subZero
+
+    lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
+    player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,lifeBar1,1)
+
+    lifeBar2=LifeBar(Jugador2.texto,Jugador2.cabeza,2)
+    player2 = Peleador(Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
+                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array, lifeBar2,2)
     fondo1=Fondo()
     vx, vy = 0, 0
     velocidad = 7
@@ -90,7 +99,9 @@ def main():
         pantalla.fill((200, 200, 200)) #pantalla blanca
         fondo1.update(pantalla)
         lifeBar1.update(pantalla)
+        lifeBar2.update(pantalla)
         player1.update(pantalla, vx, vy,fightMove,q_apretada,w_apretada,defenseMove,e_apretada,lifeBar1)
+        player2.update(pantalla, vx, vy, fightMove, q_apretada, w_apretada, defenseMove, e_apretada, lifeBar2)
         pygame.display.update()
 
     pygame.quit()
