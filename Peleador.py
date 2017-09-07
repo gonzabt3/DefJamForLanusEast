@@ -43,15 +43,15 @@ class Peleador(pygame.sprite.Sprite):
     def mover(self, vx, vy):  # metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
 
-    def update(self, superficie, vx, vy, fightMove, q_apretada, w_apretada, defenseMove, e_apretada, lifeBar1):
+    def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar):
         if (fightMove == True):  # PREGUNTO SI hay un movimiento de pelea
-            if (q_apretada == True):  # punio1
+            if (golpe == True):  # punio1
                 self.punio1(superficie)
                 self.lifeBar.actualizarBar(3)
-            if (w_apretada == True):  # patada1
+            if (patada == True):  # patada1
                 self.patada2(superficie)
         elif (defenseMove == True):
-            if (e_apretada == True):
+            if (defensa == True):
                 self.defensa1(superficie)
         elif (vx == 0 and vy == 0):  # si la velocida esta en 0 no se mueve
             self.move = False  # me fijo si se esta moviendo
