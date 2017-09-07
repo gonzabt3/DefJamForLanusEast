@@ -17,10 +17,28 @@ class Peleador(pygame.sprite.Sprite):
             self.rect.top, self.rect.left = (250, 100)
         if(player==2):
             self.rect.top, self.rect.left = (250, 550)
+            for index,imagenesMovimientos in enumerate(imagenesMovimiento):
+                self.imagenesMovimiento[index]=pygame.transform.flip(imagenesMovimientos,True,False)
+
+            for index,imagenesQuietos in enumerate(imagenesQuieto):
+                self.imagenesQuieto[index]=pygame.transform.flip(imagenesQuietos,True,False)
+
+            for index,imagenesPunio1s in enumerate(imagenesPunio1):
+                self.imagenesPunio1[index]=pygame.transform.flip(imagenesPunio1s,True,False)
+
+            for index,imagenesPatada1s in enumerate(imagenesPatada1):
+                self.imagenesPatada1[index]=pygame.transform.flip(imagenesPatada1s,True,False)
+
+            for index,imagenesDefensa1s in enumerate(imagenesDefensa1):
+                self.imagenesDefensa1[index]=pygame.transform.flip(imagenesDefensa1s,True,False)
+
         self.move = False
         self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido
         self.life = 100
         self.lifeBar = lifeBar
+
+
+
 
     def mover(self, vx, vy):  # metodo que mueve al chabon
         self.rect.move_ip(vx, vy)
