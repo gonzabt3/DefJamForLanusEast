@@ -13,6 +13,7 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
+        self.player=player
         if(player==1):
             self.rect.top, self.rect.left = (250, 100)
         if(player==2):
@@ -59,10 +60,17 @@ class Peleador(pygame.sprite.Sprite):
         else:  # si la velocidad no esta en 0 se mueve
             self.move = True
             self.mover(vx, vy)
-            if (vx > 0):
-                self.moverse(superficie)
-            if (vx < 0):
-                self.moverseAtras(superficie)
+            #direccion al caminar
+            if(self.player==1):
+                if (vx > 0):
+                    self.moverse(superficie)
+                if (vx < 0):
+                    self.moverseAtras(superficie)
+            if (self.player ==2):
+                if (vx < 0):
+                    self.moverse(superficie)
+                if (vx > 0):
+                    self.moverseAtras(superficie)
 
     def estarQuieto(self, superficie):  # funcion que anima al personaj cuando esta quieto
         self.estado = 0;
