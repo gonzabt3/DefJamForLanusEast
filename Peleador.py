@@ -16,6 +16,7 @@ class Peleador(pygame.sprite.Sprite):
         self.player=player
         if(player==1):
             self.rect.top, self.rect.left = (250, 100)
+        #doy vuelta imagenes si es el player2
         if(player==2):
             self.rect.top, self.rect.left = (250, 550)
             for index,imagenesMovimientos in enumerate(imagenesMovimiento):
