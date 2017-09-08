@@ -6,6 +6,7 @@ from Fondo import Fondo
 from Peleador import Peleador
 import Fonte
 import subZero
+from Time import Time
 from threading import Timer
 
 
@@ -162,6 +163,8 @@ def main():
                     seis_apretada=False
                     defenseMove2=False
 
+        tiempo2=Time()
+
         reloj1.tick(12) #relog
         pantalla.fill((200, 200, 200)) #pantalla blanca
         fondo1.update(pantalla)
@@ -169,6 +172,7 @@ def main():
         lifeBar2.update(pantalla)
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1)
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2)
+        tiempo2.update(pantalla)
         pygame.display.update()
 
     pygame.quit()
