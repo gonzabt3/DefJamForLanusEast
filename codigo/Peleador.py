@@ -12,10 +12,13 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesDefensa1 = imagenesDefensa1
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
-        self.rect = self.imagen.get_rect()
+        self.rect = pygame.Rect((100,180),(60,150))
+
+        # self.rect.inflate_ip(-50,-20)
+
         self.player=player
         if(player==1):
-            self.rect.top, self.rect.left = (250, 100)
+            self.rect.top, self.rect.left = (250, 100) #posicion en la pantalla
         #doy vuelta imagenes si es el player2
         if(player==2):
             self.rect.top, self.rect.left = (250, 550)
@@ -58,6 +61,7 @@ class Peleador(pygame.sprite.Sprite):
         elif (vx == 0 and vy == 0):  # si la velocida esta en 0 no se mueve
             self.move = False  # me fijo si se esta moviendo
             self.estarQuieto(superficie)
+            pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
         else:  # si la velocidad no esta en 0 se mueve
             self.move = True
             self.mover(vx, vy)
