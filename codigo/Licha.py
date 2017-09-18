@@ -49,4 +49,4 @@ imagenDefensa1Array = [imagenDefensa1, imagenDefensa2]
 texto = pygame.image.load("imagenes/licha/texto.png").convert_alpha()
 
 # cabeza
-cabeza = pygame.image.load("imagenes/fonte/cabeza.png").convert_alpha()
+cabeza = pygame.image.load("imagenes/licha/cabeza.png").convert_alpha()

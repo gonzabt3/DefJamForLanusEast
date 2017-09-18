@@ -61,7 +61,7 @@ class Peleador(pygame.sprite.Sprite):
         elif (vx == 0 and vy == 0):  # si la velocida esta en 0 no se mueve
             self.move = False  # me fijo si se esta moviendo
             self.estarQuieto(superficie)
-            pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
+            # pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
         else:  # si la velocidad no esta en 0 se mueve
             self.move = True
             self.mover(vx, vy)
