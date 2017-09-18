@@ -6,6 +6,7 @@ from Fondo import Fondo
 from Peleador import Peleador
 import Fonte
 import subZero
+import Licha
 from Time import Time
 from threading import Timer
 
@@ -18,7 +19,7 @@ def main():
     reloj1 = pygame.time.Clock()
 
 
-    Jugador1=Fonte
+    Jugador1=Licha
     Jugador2=subZero
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
