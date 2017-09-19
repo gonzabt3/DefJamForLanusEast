@@ -16,15 +16,15 @@ imagenParado10 = pygame.image.load("imagenes/licha/parado/mov10s.png").convert_a
 imagenParadoArray = [imagenParado1, imagenParado2, imagenParado3, imagenParado4, imagenParado5, imagenParado6,imagenParado7, imagenParado8, imagenParado9, imagenParado10]
 
 # imagenes chabon movimietno
-imagenMovimiento1 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento1.png").convert_alpha()
-imagenMovimiento2 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento2.png").convert_alpha()
-imagenMovimiento3 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento3.png").convert_alpha()
-imagenMovimiento4 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento4.png").convert_alpha()
-imagenMovimiento5 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento5.png").convert_alpha()
-imagenMovimiento6 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento6.png").convert_alpha()
-imagenMovimiento7 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento7.png").convert_alpha()
-imagenMovimiento8 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento8.png").convert_alpha()
-imagenMovimiento9 = pygame.image.load("imagenes/zub_zero/movimiento/movimiento9.png").convert_alpha()
+imagenMovimiento1 = pygame.image.load("imagenes/licha/movimiento/mov1.png").convert_alpha()
+imagenMovimiento2 = pygame.image.load("imagenes/licha/movimiento/mov2.png").convert_alpha()
+imagenMovimiento3 = pygame.image.load("imagenes/licha/movimiento/mov3.png").convert_alpha()
+imagenMovimiento4 = pygame.image.load("imagenes/licha/movimiento/mov4.png").convert_alpha()
+imagenMovimiento5 = pygame.image.load("imagenes/licha/movimiento/mov5.png").convert_alpha()
+imagenMovimiento6 = pygame.image.load("imagenes/licha/movimiento/mov6.png").convert_alpha()
+imagenMovimiento7 = pygame.image.load("imagenes/licha/movimiento/mov7.png").convert_alpha()
+imagenMovimiento8 = pygame.image.load("imagenes/licha/movimiento/mov8.png").convert_alpha()
+imagenMovimiento9 = pygame.image.load("imagenes/licha/movimiento/mov9.png").convert_alpha()
 imagenMovimientoArray = [imagenMovimiento1, imagenMovimiento2, imagenMovimiento3, imagenMovimiento4, imagenMovimiento5,imagenMovimiento6, imagenMovimiento7, imagenMovimiento8, imagenMovimiento9]
 
 # imagenes chabon punio1

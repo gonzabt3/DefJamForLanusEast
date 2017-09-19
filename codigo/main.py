@@ -19,8 +19,8 @@ def main():
     reloj1 = pygame.time.Clock()
 
 
-    Jugador1=Fonte
-    Jugador2=Licha
+    Jugador1=Licha
+    Jugador2=Fonte
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
     player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,lifeBar1,1)
