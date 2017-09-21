@@ -6,6 +6,7 @@ from Fondo import Fondo
 from Peleador import Peleador
 import Fonte
 import subZero
+import Pablo
 import Licha
 from Time import Time
 from threading import Timer
@@ -20,7 +21,7 @@ def main():
 
 
     Jugador1=Licha
-    Jugador2=Fonte
+    Jugador2=Pablo
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
     player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,lifeBar1,1)
