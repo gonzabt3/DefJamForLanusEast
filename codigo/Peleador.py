@@ -1,10 +1,18 @@
 import pygame
 
+pygame.init()
+#sonidos
+punio1Sonido=pygame.mixer.Sound("sonidos/punio.wav")
+punioBloqueoSonido=pygame.mixer.Sound("sonidos/puniob.wav")
+patadaSonido=pygame.mixer.Sound("sonidos/patada.wav")
+patadaBloqueoSonido=pygame.mixer.Sound("sonidos/patadab.wav")
 
 class Peleador(pygame.sprite.Sprite):
     def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1, lifeBar,player):
 
         # atributos
+
+
         self.imagenesMovimiento = imagenesMovimiento
         self.imagenesQuieto = imagenesQuieto
         self.imagenesPunio1 = imagenesPunio1
@@ -12,16 +20,25 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesDefensa1 = imagenesDefensa1
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
-        self.rect = pygame.Rect((100,180),(60,150))
+        self.rect = self.imagen.get_rect()
+        self.rect.inflate_ip(-20,-20)
 
-        # self.rect.inflate_ip(-50,-20)
 
         self.player=player
         if(player==1):
-            self.rect.top, self.rect.left = (250, 100) #posicion en la pantalla
+            self.x=100
+            self.y=250
+            self.rect.top,self.rect.left = (self.y,self.x) #posicion en la pantalla
+
+            # seteo rects golpes
+            self.rectPunio = pygame.Rect((210, 279), (10, 10))
+            self.rectPatada =pygame.Rect((230,318),(10,10))
+
         #doy vuelta imagenes si es el player2
         if(player==2):
-            self.rect.top, self.rect.left = (250, 550)
+            self.x = 550
+            self.y = 250
+            self.rect.top, self.rect.left = ( self.y,self.x)  # posicion en la pantalla
             for index,imagenesMovimientos in enumerate(imagenesMovimiento):
                 self.imagenesMovimiento[index]=pygame.transform.flip(imagenesMovimientos,True,False)
 
@@ -37,6 +54,13 @@ class Peleador(pygame.sprite.Sprite):
             for index,imagenesDefensa1s in enumerate(imagenesDefensa1):
                 self.imagenesDefensa1[index]=pygame.transform.flip(imagenesDefensa1s,True,False)
 
+            #seteo rects golpes
+            self.rectPunio = pygame.Rect((552, 276), (10, 10))
+            self.rectPatada = pygame.Rect((552, 285), (10, 10))
+
+
+
+
         self.move = False
         self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido
         self.life = 100
@@ -46,15 +70,37 @@ class Peleador(pygame.sprite.Sprite):
 
 
     def mover(self, vx, vy):  # metodo que mueve al chabon
-        self.rect.move_ip(vx, vy)
+        #muevo los recs de lugar
+        self.rect.move_ip(vx,vy)
+        self.rectPunio.move_ip(vx,vy)
+        self.rectPatada.move_ip(vx,vy)
 
-    def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar):
+        #actulizo localizacion
+        self.x = self.rect.x
+        self.y = self.rect.y
+
+    def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
         if (fightMove == True):  # PREGUNTO SI hay un movimiento de pelea
             if (golpe == True):  # punio1
                 self.punio1(superficie)
-                self.lifeBar.actualizarBar(3)
+
+                if(self.rectPunio.colliderect(oponente.rect) and oponente.estado!=2):
+                    oponente.lifeBar.actualizarBar(3)
+                    punio1Sonido.play()
+
+                if (self.rectPunio.colliderect(oponente.rect) and oponente.estado == 2):
+                    oponente.lifeBar.actualizarBar(1)
+                    punioBloqueoSonido.play()
+
             if (patada == True):  # patada1
                 self.patada2(superficie)
+                if (self.rectPatada.colliderect(oponente.rect) and oponente.estado != 2):
+                    oponente.lifeBar.actualizarBar(5)
+                    patadaSonido.play()
+                if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 2):
+                    oponente.lifeBar.actualizarBar(2)
+                    patadaBloqueoSonido.play()
+
         elif (defenseMove == True):
             if (defensa == True):
                 self.defensa1(superficie)
@@ -102,11 +148,12 @@ class Peleador(pygame.sprite.Sprite):
             if self.imagenActual > len(self.imagenesPunio1):
                 self.imagenActual = 0
             self.nextImageLimitado(self.imagenesPunio1)
-            print self.imagenActual
+            # print self.imagenActual
             if self.imagenActual > len(self.imagenesPunio1):
                 self.imagenActual - 1
             if self.imagenActual < len(self.imagenesPunio1):
                 superficie.blit(self.imagenesPunio1[self.imagenActual], self.rect)
+                pygame.draw.rect(superficie,(255,0,0),self.rectPunio) # line para pintar recs
 
     def patada2(self, superficie):
         self.estado = 1
@@ -120,6 +167,7 @@ class Peleador(pygame.sprite.Sprite):
                 self.imagenActual - 1
             if self.imagenActual < len(self.imagenesPatada1):
                 superficie.blit(self.imagenesPatada1[self.imagenActual], self.rect)
+                pygame.draw.rect(superficie, (255, 0, 0), self.rectPatada)  # line para pintar recs
 
     def defensa1(self, superficie):
         self.estado = 2

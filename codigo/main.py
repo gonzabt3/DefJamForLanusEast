@@ -19,6 +19,8 @@ def main():
     salir = False
     reloj1 = pygame.time.Clock()
 
+    #musica
+    pygame.mixer.music.load("musica.mp3")
 
     Jugador1=Licha
     Jugador2=Pablo
@@ -44,7 +46,8 @@ def main():
     left_apretada,right_apretada,cuatro_apretada,cinco_apretada,seis_apretada=False,False,False,False,False
     fightMove2 = False
     defenseMove2 = False
-    
+
+    pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -172,8 +175,8 @@ def main():
         fondo1.update(pantalla)
         lifeBar1.update(pantalla)
         lifeBar2.update(pantalla)
-        player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1)
-        player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2)
+        player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)
+        player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
         tiempo2.update(pantalla)
         pygame.display.update()
 
