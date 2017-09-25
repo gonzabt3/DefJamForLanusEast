@@ -26,11 +26,12 @@ def main():
     Jugador2=Pablo
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
-    player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,lifeBar1,1)
+    player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
+                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador2.imagenHeridoArray,lifeBar1,1)
 
     lifeBar2=LifeBar(Jugador2.texto,Jugador2.cabeza,2)
     player2 = Peleador(Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
-                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array, lifeBar2,2)
+                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,lifeBar2,2)
     fondo1=Fondo()
     vx1, vy1 = 0, 0
     vx2, vy2 = 0, 0

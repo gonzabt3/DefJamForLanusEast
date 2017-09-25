@@ -8,7 +8,7 @@ patadaSonido=pygame.mixer.Sound("sonidos/patada.wav")
 patadaBloqueoSonido=pygame.mixer.Sound("sonidos/patadab.wav")
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1, lifeBar,player):
+    def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,lifeBar,player):
 
         # atributos
 
@@ -18,6 +18,7 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesPunio1 = imagenesPunio1
         self.imagenesPatada1 = imagenesPatada1
         self.imagenesDefensa1 = imagenesDefensa1
+        self.imagenesHerido=imagenesHerido
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
@@ -54,6 +55,9 @@ class Peleador(pygame.sprite.Sprite):
             for index,imagenesDefensa1s in enumerate(imagenesDefensa1):
                 self.imagenesDefensa1[index]=pygame.transform.flip(imagenesDefensa1s,True,False)
 
+            for index,imagenesHeridos in enumerate(imagenesHerido):
+                self.imagenesHerido[index]=pygame.transform.flip(imagenesHeridos,True,False)
+
             #seteo rects golpes
             self.rectPunio = pygame.Rect((552, 276), (10, 10))
             self.rectPatada = pygame.Rect((552, 285), (10, 10))
@@ -87,6 +91,8 @@ class Peleador(pygame.sprite.Sprite):
                 if(self.rectPunio.colliderect(oponente.rect) and oponente.estado!=2):
                     oponente.lifeBar.actualizarBar(3)
                     punio1Sonido.play()
+                    oponente.estado=3
+
 
                 if (self.rectPunio.colliderect(oponente.rect) and oponente.estado == 2):
                     oponente.lifeBar.actualizarBar(1)
@@ -97,6 +103,7 @@ class Peleador(pygame.sprite.Sprite):
                 if (self.rectPatada.colliderect(oponente.rect) and oponente.estado != 2):
                     oponente.lifeBar.actualizarBar(5)
                     patadaSonido.play()
+                    oponente.estado = 3
                 if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 2):
                     oponente.lifeBar.actualizarBar(2)
                     patadaBloqueoSonido.play()
@@ -104,7 +111,10 @@ class Peleador(pygame.sprite.Sprite):
         elif (defenseMove == True):
             if (defensa == True):
                 self.defensa1(superficie)
-        elif (vx == 0 and vy == 0):  # si la velocida esta en 0 no se mueve
+        elif(self.estado==3):
+            self.herido(superficie)
+            self.estado=0
+        elif (vx == 0 and vy == 0 ):  # si la velocida esta en 0 no se mueve
             self.move = False  # me fijo si se esta moviendo
             self.estarQuieto(superficie)
             # pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
@@ -127,6 +137,11 @@ class Peleador(pygame.sprite.Sprite):
         self.estado = 0;
         self.nextImage(self.imagenesQuieto)
         superficie.blit(self.imagenesQuieto[self.imagenActual], self.rect)
+
+    def herido(self,superficie):
+
+        superficie.blit(self.imagenesHerido[1], self.rect)
+
 
     def moverse(self, superficie):
         self.nextImage(self.imagenesMovimiento)

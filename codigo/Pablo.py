@@ -45,6 +45,11 @@ imagenDefensa1 = pygame.image.load("imagenes/pablo/defensa/def1s.png").convert_a
 imagenDefensa2 = pygame.image.load("imagenes/pablo/defensa/def2s.png").convert_alpha()
 imagenDefensa1Array = [imagenDefensa1, imagenDefensa2]
 
+#imagene chabon herido
+herido1=pygame.image.load("imagenes/pablo/herido/herido1.png").convert_alpha()
+herido2=pygame.image.load("imagenes/pablo/herido/herido2.png").convert_alpha()
+imagenHeridoArray=[herido1,herido2]
+
 # texto
 texto = pygame.image.load("imagenes/pablo/texto.png").convert_alpha()
 
