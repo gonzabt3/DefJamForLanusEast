@@ -8,7 +8,7 @@ patadaSonido=pygame.mixer.Sound("sonidos/patada.wav")
 patadaBloqueoSonido=pygame.mixer.Sound("sonidos/patadab.wav")
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,lifeBar,player):
+    def __init__(self, imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,lifeBar,player):
 
         # atributos
 
@@ -18,7 +18,8 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesPunio1 = imagenesPunio1
         self.imagenesPatada1 = imagenesPatada1
         self.imagenesDefensa1 = imagenesDefensa1
-        self.imagenesHerido=imagenesHerido
+        self.imagenesHerido = imagenesHerido
+        self.imagenesMuerto = imagenesMuerto
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
@@ -66,7 +67,7 @@ class Peleador(pygame.sprite.Sprite):
 
 
         self.move = False
-        self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido
+        self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido,4=muerto,5=ganador
         self.life = 100
         self.lifeBar = lifeBar
 
@@ -84,54 +85,60 @@ class Peleador(pygame.sprite.Sprite):
         self.y = self.rect.y
 
     def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
-        if (fightMove == True):  # PREGUNTO SI hay un movimiento de pelea
-            if (golpe == True):  # punio1
-                self.punio1(superficie)
+        if(self.estado !=4):
+            if (fightMove == True):  # PREGUNTO SI hay un movimiento de pelea
+                if (golpe == True):  # punio1
+                    self.punio1(superficie)
 
-                if(self.rectPunio.colliderect(oponente.rect) and oponente.estado!=2):
-                    oponente.lifeBar.actualizarBar(3)
-                    punio1Sonido.play()
-                    oponente.estado=3
+                    if(self.rectPunio.colliderect(oponente.rect) and oponente.estado!=2):
+                        oponente.lifeBar.actualizarBar(3)
+                        punio1Sonido.play()
+                        oponente.estado=3
+                        oponente.life=oponente.life-3
 
+                    if (self.rectPunio.colliderect(oponente.rect) and oponente.estado == 2):
+                        oponente.lifeBar.actualizarBar(1)
+                        punioBloqueoSonido.play()
+                        oponente.life = oponente.life - 1
+                if (patada == True):  # patada1
+                    self.patada2(superficie)
+                    if (self.rectPatada.colliderect(oponente.rect) and oponente.estado != 2):
+                        oponente.lifeBar.actualizarBar(5)
+                        patadaSonido.play()
+                        oponente.estado = 3
+                        oponente.life = oponente.life - 5
+                    if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 2):
+                        oponente.lifeBar.actualizarBar(2)
+                        patadaBloqueoSonido.play()
+                        oponente.life = oponente.life - 2
 
-                if (self.rectPunio.colliderect(oponente.rect) and oponente.estado == 2):
-                    oponente.lifeBar.actualizarBar(1)
-                    punioBloqueoSonido.play()
+            elif (defenseMove == True):
+                if (defensa == True):
+                    self.defensa1(superficie)
+            elif(self.estado==3):
+                self.herido(superficie)
+                self.estado=0
+            elif (vx == 0 and vy == 0 ):  # si la velocida esta en 0 no se mueve
+                self.move = False  # me fijo si se esta moviendo
+                self.estarQuieto(superficie)
+                # pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
+            else:  # si la velocidad no esta en 0 se mueve
+                self.move = True
+                self.mover(vx, vy)
+                #direccion al caminar
+                if(self.player==1):
+                    if (vx > 0):
+                        self.moverse(superficie)
+                    if (vx < 0):
+                        self.moverseAtras(superficie)
+                if (self.player ==2):
+                    if (vx < 0):
+                        self.moverse(superficie)
+                    if (vx > 0):
+                        self.moverseAtras(superficie)
+        else:
+            self.muerto(superficie)
 
-            if (patada == True):  # patada1
-                self.patada2(superficie)
-                if (self.rectPatada.colliderect(oponente.rect) and oponente.estado != 2):
-                    oponente.lifeBar.actualizarBar(5)
-                    patadaSonido.play()
-                    oponente.estado = 3
-                if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 2):
-                    oponente.lifeBar.actualizarBar(2)
-                    patadaBloqueoSonido.play()
-
-        elif (defenseMove == True):
-            if (defensa == True):
-                self.defensa1(superficie)
-        elif(self.estado==3):
-            self.herido(superficie)
-            self.estado=0
-        elif (vx == 0 and vy == 0 ):  # si la velocida esta en 0 no se mueve
-            self.move = False  # me fijo si se esta moviendo
-            self.estarQuieto(superficie)
-            # pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
-        else:  # si la velocidad no esta en 0 se mueve
-            self.move = True
-            self.mover(vx, vy)
-            #direccion al caminar
-            if(self.player==1):
-                if (vx > 0):
-                    self.moverse(superficie)
-                if (vx < 0):
-                    self.moverseAtras(superficie)
-            if (self.player ==2):
-                if (vx < 0):
-                    self.moverse(superficie)
-                if (vx > 0):
-                    self.moverseAtras(superficie)
 
     def estarQuieto(self, superficie):  # funcion que anima al personaj cuando esta quieto
         self.estado = 0;
@@ -142,6 +149,9 @@ class Peleador(pygame.sprite.Sprite):
 
         superficie.blit(self.imagenesHerido[1], self.rect)
 
+    def muerto(self,superficie):
+        self.nextImage(self.imagenesMuerto)
+        superficie.blit(self.imagenesMuerto[self.imagenActual], self.rect)
 
     def moverse(self, superficie):
         self.nextImage(self.imagenesMovimiento)

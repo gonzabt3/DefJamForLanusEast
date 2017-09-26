@@ -50,6 +50,13 @@ herido1=pygame.image.load("imagenes/pablo/herido/herido1.png").convert_alpha()
 herido2=pygame.image.load("imagenes/pablo/herido/herido2.png").convert_alpha()
 imagenHeridoArray=[herido1,herido2]
 
+#imagenes chabon muerto
+muerto1=pygame.image.load("imagenes/pablo/muerto/muerto1.png").convert_alpha()
+muerto2=pygame.image.load("imagenes/pablo/muerto/muerto2.png").convert_alpha()
+muerto3=pygame.image.load("imagenes/pablo/muerto/muerto3.png").convert_alpha()
+muerto4=pygame.image.load("imagenes/pablo/muerto/muerto4.png").convert_alpha()
+imagenMuertoArray=[muerto1,muerto2,muerto3,muerto4]
+
 # texto
 texto = pygame.image.load("imagenes/pablo/texto.png").convert_alpha()
 

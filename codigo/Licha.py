@@ -45,6 +45,22 @@ imagenDefensa1 = pygame.image.load("imagenes/licha/defensa/def1s.png").convert_a
 imagenDefensa2 = pygame.image.load("imagenes/licha/defensa/def2s.png").convert_alpha()
 imagenDefensa1Array = [imagenDefensa1, imagenDefensa2]
 
+#imagene chabon herido
+herido1=pygame.image.load("imagenes/licha/herido/herido1.png").convert_alpha()
+herido2=pygame.image.load("imagenes/licha/herido/herido2.png").convert_alpha()
+imagenHeridoArray=[herido1,herido2]
+
+#imagenes chabon muerto
+muerto1=pygame.image.load("imagenes/licha/muerto/muerto1.png").convert_alpha()
+muerto2=pygame.image.load("imagenes/licha/muerto/muerto2.png").convert_alpha()
+muerto3=pygame.image.load("imagenes/licha/muerto/muerto3.png").convert_alpha()
+muerto4=pygame.image.load("imagenes/licha/muerto/muerto4.png").convert_alpha()
+muerto5=pygame.image.load("imagenes/licha/muerto/muerto5.png").convert_alpha()
+muerto6=pygame.image.load("imagenes/licha/muerto/muerto6.png").convert_alpha()
+muerto7=pygame.image.load("imagenes/licha/muerto/muerto7.png").convert_alpha()
+imagenMuertoArray=[muerto1,muerto2,muerto3,muerto4,muerto5,muerto6,muerto7]
+
+
 # texto
 texto = pygame.image.load("imagenes/licha/texto.png").convert_alpha()
 

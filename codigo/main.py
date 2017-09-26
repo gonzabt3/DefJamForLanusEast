@@ -12,6 +12,19 @@ from Time import Time
 from threading import Timer
 
 
+
+
+def verificarVida(player1,player2):
+    if (player1.life<=0):
+        player1.estado=4
+        player2.estado=5
+        print "muerto el 1"
+    if (player2.life<=0):
+        player2.estado=4
+        player1.estado=5
+        print "muerto el 2"
+
+
 def main():
 
     pygame.init()
@@ -22,16 +35,16 @@ def main():
     #musica
     pygame.mixer.music.load("musica.mp3")
 
-    Jugador1=Pablo
-    Jugador2=Licha
+    Jugador1=Licha
+    Jugador2=Pablo
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
     player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
-                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,lifeBar1,1)
+                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,Jugador1.imagenMuertoArray,lifeBar1,1)
 
     lifeBar2=LifeBar(Jugador2.texto,Jugador2.cabeza,2)
     player2 = Peleador(Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
-                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador1.imagenHeridoArray,lifeBar2,2)
+                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,Jugador2.imagenMuertoArray,lifeBar2,2)
     fondo1=Fondo()
     vx1, vy1 = 0, 0
     vx2, vy2 = 0, 0
@@ -48,7 +61,9 @@ def main():
     fightMove2 = False
     defenseMove2 = False
 
-    pygame.mixer.music.play(2)
+
+
+    # pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -171,6 +186,7 @@ def main():
 
         tiempo2=Time()
 
+
         reloj1.tick(12) #relog
         pantalla.fill((200, 200, 200)) #pantalla blanca
         fondo1.update(pantalla)
@@ -179,6 +195,7 @@ def main():
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
         tiempo2.update(pantalla)
+        verificarVida(player1,player2)
         pygame.display.update()
 
     pygame.quit()
