@@ -21,14 +21,14 @@ def verificarVida(player1,player2,superficie):
         player2.estado=5
         label=fuente.render("GANADOR PLAYER 2",1,(255,0,0))
         superficie.blit(label,(100,100))
-
+        Pelea()
 
     if (player2.life<-100):
         player2.estado=4
         player1.estado=5
         label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
         superficie.blit(label, (100, 100))
-
+        Pelea()
 
 def Pelea():
 
@@ -222,8 +222,8 @@ def main():
     ]
 
     pygame.font.init()
-    screen = pygame.display.set_mode((320, 240))
-    fondo = pygame.image.load("fondo.png").convert()
+    screen = pygame.display.set_mode((600, 500))
+    fondo = pygame.image.load("defjam.jpg").convert()
     menu = Menu(opciones)
 
     while not salir:

@@ -52,14 +52,14 @@ class Menu:
         total = self.total
         indice = 0
         altura_de_opcion = 30
-        x = 105
-        y = 105
+        x = 230
+        y = 275
         
         for (titulo, funcion) in self.opciones:
             if indice == self.seleccionado:
                 color = (200, 0, 0)
             else:
-                color = (0, 0, 0)
+                color = (250, 244, 227)
 
             imagen = self.font.render(titulo, 1, color)
             posicion = (x, y + altura_de_opcion * indice)
@@ -82,28 +82,28 @@ def salir_del_programa():
     sys.exit(0)
 
 
-if __name__ == '__main__':
-    
-    salir = False
-    opciones = [
-        ("Jugar", comenzar_nuevo_juego),
-        ("Salir", salir_del_programa)
-        ]
-
-    pygame.font.init()
-    screen = pygame.display.set_mode((750, 500))
-    fondo = pygame.image.load("fondo.png").convert()
-    menu = Menu(opciones)
-
-    while not salir:
-
-        for e in pygame.event.get():
-            if e.type == QUIT:
-                salir = True
-
-        screen.blit(fondo, (0, 0))
-        menu.actualizar()
-        menu.imprimir(screen)
-
-        pygame.display.flip()
-        pygame.time.delay(10)
+# if __name__ == '__main__':
+#
+#     salir = False
+#     opciones = [
+#         ("Jugar", comenzar_nuevo_juego),
+#         ("Salir", salir_del_programa)
+#         ]
+#
+#     pygame.font.init()
+#     screen = pygame.display.set_mode((600, 500))
+#     fondo = pygame.image.load("defjam.jpg").convert()
+#     menu = Menu(opciones)
+#
+#     while not salir:
+#
+#         for e in pygame.event.get():
+#             if e.type == QUIT:
+#                 salir = True
+#
+#         screen.blit(fondo, (0, 0))
+#         menu.actualizar()
+#         menu.imprimir(screen)
+#
+#         pygame.display.flip()
+#         pygame.time.delay(10)
