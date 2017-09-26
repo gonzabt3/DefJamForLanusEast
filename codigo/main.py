@@ -8,6 +8,7 @@ import Fonte
 import subZero
 import Pablo
 import Licha
+from menu import Menu
 from Time import Time
 from threading import Timer
 
@@ -21,6 +22,7 @@ def verificarVida(player1,player2,superficie):
         label=fuente.render("GANADOR PLAYER 2",1,(255,0,0))
         superficie.blit(label,(100,100))
 
+
     if (player2.life<-100):
         player2.estado=4
         player1.estado=5
@@ -28,7 +30,7 @@ def verificarVida(player1,player2,superficie):
         superficie.blit(label, (100, 100))
 
 
-def main():
+def Pelea():
 
     pygame.init()
     pantalla = pygame.display.set_mode((750, 500))
@@ -203,6 +205,40 @@ def main():
 
     pygame.quit()
 
+
+def salir_del_programa():
+    import sys
+    sys.exit(0)
+
+def Pass():
+    pass
+
+def main():
+    salir = False
+    opciones = [
+        ("Jugar", Pelea),
+        ("", Pass),
+        ("Salir", salir_del_programa)
+    ]
+
+    pygame.font.init()
+    screen = pygame.display.set_mode((320, 240))
+    fondo = pygame.image.load("fondo.png").convert()
+    menu = Menu(opciones)
+
+    while not salir:
+
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
+                salir = True
+
+        screen.blit(fondo, (0, 0))
+        menu.actualizar()
+        menu.imprimir(screen)
+
+        pygame.display.flip()
+        pygame.time.delay(10)
+
+
+
 main()
-
-

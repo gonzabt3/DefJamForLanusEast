@@ -178,7 +178,7 @@ class Peleador(pygame.sprite.Sprite):
                 self.imagenActual - 1
             if self.imagenActual < len(self.imagenesPunio1):
                 superficie.blit(self.imagenesPunio1[self.imagenActual], self.rect)
-                pygame.draw.rect(superficie,(255,0,0),self.rectPunio) # line para pintar recs
+                # pygame.draw.rect(superficie,(255,0,0),self.rectPunio) # line para pintar recs
 
     def patada2(self, superficie):
         self.estado = 1
@@ -192,7 +192,7 @@ class Peleador(pygame.sprite.Sprite):
                 self.imagenActual - 1
             if self.imagenActual < len(self.imagenesPatada1):
                 superficie.blit(self.imagenesPatada1[self.imagenActual], self.rect)
-                pygame.draw.rect(superficie, (255, 0, 0), self.rectPatada)  # line para pintar recs
+                # pygame.draw.rect(superficie, (255, 0, 0), self.rectPatada)  # line para pintar recs
 
     def defensa1(self, superficie):
         self.estado = 2
