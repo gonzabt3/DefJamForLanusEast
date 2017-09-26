@@ -2,7 +2,8 @@ import pygame
 
 class Time(str):
     def __init__(self):
-        self.fuente=pygame.font.SysFont("Super Mario Bros.",50,True,False)
+        # self.fuente=pygame.font.SysFont("Super Mario Bros.",50,True,False)
+        self.fuente=fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
         self.tiempo="asd",
         # self.reloj=pygame.time.Clock()
 

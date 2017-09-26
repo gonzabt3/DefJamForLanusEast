@@ -11,18 +11,21 @@ import Licha
 from Time import Time
 from threading import Timer
 
+fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
 
-
-def verificarVida(player1,player2):
-    if (player1.life<=0):
+def verificarVida(player1,player2,superficie):
+    if (player1.life<=-100):
         player1.estado=4
         player2.estado=5
-        print "muerto el 1"
-    if (player2.life<=0):
+        label=fuente.render("GANADOR PLAYER 2",1,(255,0,0))
+        superficie.blit(label,(100,100))
+
+    if (player2.life<-100):
         player2.estado=4
         player1.estado=5
-        print "muerto el 2"
+        label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
+        superficie.blit(label, (100, 100))
 
 
 def main():
@@ -195,7 +198,7 @@ def main():
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
         tiempo2.update(pantalla)
-        verificarVida(player1,player2)
+        verificarVida(player1,player2,pantalla)
         pygame.display.update()
 
     pygame.quit()
