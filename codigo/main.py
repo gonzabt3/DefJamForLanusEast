@@ -11,7 +11,7 @@ import Licha
 from menu import Menu
 from Time import Time
 from threading import Timer
-from selectCharacter import select
+from selectCharacter import Select
 
 fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
@@ -216,7 +216,9 @@ def Pass():
 
 def main():
 
-    select=select()
+    select = Select()
+    select.pantalla()
+
 
     # salir = False
     # opciones = [
