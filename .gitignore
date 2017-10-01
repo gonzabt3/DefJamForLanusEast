@@ -4,3 +4,6 @@
 .idea/prueba.iml
 .idea/workspace.xml
 
+*.pyc
+*.pyc
+*.iml
