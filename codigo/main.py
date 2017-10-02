@@ -10,8 +10,10 @@ import Pablo
 import Licha
 from menu import Menu
 from Time import Time
+import seleccion
+from seleccion import Select
 from threading import Timer
-from selectCharacter import Select
+
 
 fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
@@ -211,39 +213,42 @@ def salir_del_programa():
     import sys
     sys.exit(0)
 
+def selectPersonaje():
+
+    seleccion.main()
+    
+
 def Pass():
     pass
 
 def main():
 
-    select = Select()
-    select.pantalla()
 
 
-    # salir = False
-    # opciones = [
-    #     ("Jugar", Pelea),
-    #     ("", Pass),
-    #     ("Salir", salir_del_programa)
-    # ]
-    #
-    # pygame.font.init()
-    # screen = pygame.display.set_mode((600, 500))
-    # fondo = pygame.image.load("defjam.jpg").convert()
-    # menu = Menu(opciones)
-    #
-    # while not salir:
-    #
-    #     for e in pygame.event.get():
-    #         if e.type == pygame.QUIT:
-    #             salir = True
-    #
-    #     screen.blit(fondo, (0, 0))
-    #     menu.actualizar()
-    #     menu.imprimir(screen)
-    #
-    #     pygame.display.flip()
-    #     pygame.time.delay(10)
+    salir = False
+    opciones = [
+        ("Jugar", selectPersonaje),
+        ("", Pass),
+        ("Salir", salir_del_programa)
+    ]
+
+    pygame.font.init()
+    screen = pygame.display.set_mode((600, 500))
+    fondo = pygame.image.load("defjam.jpg").convert()
+    menu = Menu(opciones)
+
+    while not salir:
+
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
+                salir = True
+
+        screen.blit(fondo, (0, 0))
+        menu.actualizar()
+        menu.imprimir(screen)
+
+        pygame.display.flip()
+        pygame.time.delay(10)
 
 
 
