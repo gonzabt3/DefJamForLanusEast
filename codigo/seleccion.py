@@ -12,12 +12,12 @@ class Select(pygame.sprite.Sprite):
 
         if(player==1):
             self.player=1
-            self.rect.top, self.rect.left = (75, 160)
-            self.posicion=0
+            self.rect.top, self.rect.left = (75, 270)
+            self.posicion=1
         elif(player==2):
             self.player = 2
-            self.rect.top, self.rect.left = (75, 480)
-            self.posicion = 3
+            self.rect.top, self.rect.left = (75, 380)
+            self.posicion = 2
 
 
     def update(self, superficie,posicion,apretada,direccion):

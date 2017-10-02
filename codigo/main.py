@@ -216,7 +216,7 @@ def salir_del_programa():
 def selectPersonaje():
 
     seleccion.main()
-    
+
 
 def Pass():
     pass
