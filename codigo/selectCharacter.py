@@ -42,7 +42,7 @@ class Select(pygame.sprite.Sprite):
                     if k[K_c]:
                         print "c"
                         self.posicion1 -= 1
-                        self.rect1.move_ip(10, 10)
+
                     if k[K_v]:
                         print "v"
                         self.posicion1 += 1
@@ -75,10 +75,10 @@ class Select(pygame.sprite.Sprite):
 
             self.update()
 
-            reloj1.tick(12)  # relog
-            # pygame.display.flip()
-            pygame.display.update()
-            # pygame.time.delay(10)
+            # reloj1.tick()  # relog
+            pygame.display.flip()
+            # pygame.display.update()
+            pygame.time.delay(100)
 
     def update(self):
 
