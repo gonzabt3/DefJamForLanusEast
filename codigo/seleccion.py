@@ -1,6 +1,8 @@
 import pygame
 from pygame.locals import *
 
+opcion=pygame.mixer.Sound("sonidos/selectChar.wav")
+click=pygame.mixer.Sound("sonidos/clickChar.wav")
 
 class Select(pygame.sprite.Sprite):
     def __init__(self, imagen,player):
@@ -21,10 +23,10 @@ class Select(pygame.sprite.Sprite):
 
 
     def update(self, superficie,posicion,apretada,direccion):
-        if self.player==2:
-            print "PLAYER 2 PERSONAJE: %d"%posicion
-        if self.player==1:
-            print "PLAYER 1 PERSONAJE: %d"%posicion
+        # if self.player==2:
+        #     print "PLAYER 2 PERSONAJE: %d"%posicion
+        # if self.player==1:
+        #     print "PLAYER 1 PERSONAJE: %d"%posicion
         if apretada == True:
             if direccion==1 and  posicion<=3 and self.posicionPermitidoDerecha!=False :
                 self.posicionPermitidoIzquierda = True
@@ -54,6 +56,9 @@ def main():
     imagen2 = pygame.image.load("selectScreen/select2.png").convert_alpha()
     selectScreen = pygame.image.load("selectScreen/selectScreen.jpg").convert_alpha()
 
+    # musica
+    pygame.mixer.music.load("selectCharacterMusic.mp3")
+
     select1 = Select(imagen1,1)
     select2 = Select(imagen2,2)
     posicion1=select1.posicion
@@ -62,38 +67,54 @@ def main():
     direccion2 = select2.direccion
     leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada = False, False, False, False
     mantiene_pulsado = False
-
+    seleccionar1=True
+    seleccionarOpcion1=7
+    seleccionar2=True
+    seleccionarOpcion2 = 7
+    pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 salir = True
+
             k = pygame.key.get_pressed()
             apretada1=False
             apretada2=False
             if not mantiene_pulsado:
-                if k[K_c]:
-                    print "c"
-                    posicion1 -= 1
-                    direccion1=0
-                    apretada1=True
-                if k[K_v]:
-                    print "v"
-                    posicion1 += 1
-                    direccion1 = 1
-                    apretada1 = True
-                elif k[K_SPACE]:
-                    pass
-
-                if k[K_LEFT]:
-                    posicion2 -= 1
-                    direccion2=0
-                    apretada2 = True
-                if k[K_RIGHT]:
-                    posicion2 += 1
-                    direccion2=1
-                    apretada2 = True
-                elif k[K_RETURN]  :
-                    pass
+                if seleccionar1==True:
+                    if k[K_c]:
+                        opcion.play()
+                        print "c"
+                        posicion1 -= 1
+                        direccion1=0
+                        apretada1=True
+                    if k[K_v]:
+                        opcion.play()
+                        print "v"
+                        posicion1 += 1
+                        direccion1 = 1
+                        apretada1 = True
+                    elif k[K_SPACE]:
+                        click.play()
+                        print "barra"
+                        seleccionar1=False
+                        seleccionarOpcion1=posicion1
+                if seleccionar2==True:
+                    if k[K_LEFT]:
+                        opcion.play()
+                        posicion2 -= 1
+                        direccion2=0
+                        apretada2 = True
+                    if k[K_RIGHT]:
+                        opcion.play()
+                        posicion2 += 1
+                        direccion2=1
+                        apretada2 = True
+                    elif k[K_RETURN]:
+                        click.play()
+                        print "enter"
+                        seleccionar2=False
+                        seleccionarOpcion2=posicion2
 
             if posicion1 < 0:
                 posicion1 = 0
@@ -108,6 +129,10 @@ def main():
 
             # indica si el usuario mantiene pulsada alguna tecla.
             mantiene_pulsado = k[K_c] or k[K_v] or k[K_LEFT] or k[K_RIGHT] or k[K_RETURN] or k[K_SPACE]
+
+            if(seleccionar1==False and seleccionar2==False):
+                print "return"
+                return (seleccionarOpcion1,seleccionarOpcion2)
 
         reloj1.tick(8)
         pantalla.blit(selectScreen, (0, 0))

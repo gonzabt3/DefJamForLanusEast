@@ -7,6 +7,9 @@
 import pygame
 from pygame.locals import *
 
+opcion=pygame.mixer.Sound("sonidos/opcion.wav")
+click=pygame.mixer.Sound("sonidos/click.wav")
+
 
 class Menu:
     "Representa un menú con opciones para un juego"
@@ -27,10 +30,12 @@ class Menu:
         if not self.mantiene_pulsado:
             if k[K_UP]:
                 self.seleccionado -= 1
+                opcion.play()
             elif k[K_DOWN]:
                 self.seleccionado += 1
+                opcion.play()
             elif k[K_RETURN]:
-
+                click.play()
                 # Invoca a la función asociada a la opción.
                 titulo, funcion = self.opciones[self.seleccionado]
                 print "Selecciona la opción '%s'." %(titulo)

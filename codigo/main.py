@@ -24,16 +24,16 @@ def verificarVida(player1,player2,superficie):
         player2.estado=5
         label=fuente.render("GANADOR PLAYER 2",1,(255,0,0))
         superficie.blit(label,(100,100))
-        Pelea()
+
 
     if (player2.life<-100):
         player2.estado=4
         player1.estado=5
         label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
         superficie.blit(label, (100, 100))
-        Pelea()
+        
 
-def Pelea():
+def Pelea(a,b):
 
     pygame.init()
     pantalla = pygame.display.set_mode((750, 500))
@@ -43,8 +43,9 @@ def Pelea():
     #musica
     pygame.mixer.music.load("musica.mp3")
 
-    Jugador1=Licha
-    Jugador2=Pablo
+    (Jugador1,Jugador2)=selectorPersonaje(a,b)
+
+
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
     player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
@@ -71,7 +72,7 @@ def Pelea():
 
 
 
-    # pygame.mixer.music.play(2)
+    pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -215,12 +216,31 @@ def salir_del_programa():
 
 def selectPersonaje():
 
-    seleccion.main()
-
+    a,b=seleccion.main()
+    Pelea(a,b)
 
 def Pass():
     pass
 
+def selectorPersonaje(a,b):
+    # if(a==0):
+    #     player1=Enzo
+    if(a==1):
+        player1=Pablo
+    if(a==2):
+        player1=Fonte
+    if(a==3):
+        player1=Licha
+    # if(a==0):
+    #     player2=Enzo
+    if (b == 1):
+        player2 = Pablo
+    if (b == 2):
+        player2 = Fonte
+    if (b == 3):
+        player2 = Licha
+
+    return (player1,player2)
 def main():
 
 
