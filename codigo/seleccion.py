@@ -7,10 +7,10 @@ class Select(pygame.sprite.Sprite):
         self.rect = self.imagen.get_rect()
         self.rect.top, self.rect.left = (100, 200)
 
-    def mover(self, vx, vy):
-        self.rect.move_ip(vx, vy)
 
-    def update(self, superficie):
+
+    def update(self, superficie,vx,vy):
+        self.rect.move_ip(vx,vy)
         superficie.blit(self.imagen, self.rect)
 
 
@@ -18,12 +18,16 @@ def main():
     import pygame
 
     pygame.init()
-    pantalla = pygame.display.set_mode((480, 300))
+    pantalla = pygame.display.set_mode((750,500))
     salir = False
     reloj1 = pygame.time.Clock()
     imagen1 = pygame.image.load("selectScreen/select1.png").convert_alpha()
+    selectScreen = pygame.image.load("selectScreen/selectScreen.jpg").convert_alpha()
+
     select1 = Select(imagen1)
     vx, vy = 0, 0
+    posicion1=1
+    posicion2=3
     velocidad = 10
     leftsigueapretada, rightsigueapretada, upsigueapretada, downsigueapretada = False, False, False, False
 
@@ -31,49 +35,44 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 salir = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    leftsigueapretada = True
-                    vx = -velocidad
-                if event.key == pygame.K_RIGHT:
-                    rightsigueapretada = True
-                    vx = velocidad
-                if event.key == pygame.K_UP:
-                    upsigueapretada = True
-                    vy = -velocidad
-                if event.key == pygame.K_DOWN:
-                    downsigueapretada = True
-                    vy = velocidad
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
-                    leftsigueapretada = False
-                    if rightsigueapretada:
-                        vx = velocidad
-                    else:
-                        vx = 0
-                if event.key == pygame.K_RIGHT:
-                    rightsigueapretada = False
-                    if leftsigueapretada:
-                        vx = -velocidad
-                    else:
-                        vx = 0
-                if event.key == pygame.K_UP:
-                    upsigueapretada = False
-                    if downsigueapretada:
-                        vy = velocidad
-                    else:
-                        vy = -0
-                if event.key == pygame.K_DOWN:
-                    downsigueapretada = False
-                    if upsigueapretada:
-                        vy = -velocidad
-                    else:
-                        vy = 0
+            k = pygame.key.get_pressed()
+
+            if not mantiene_pulsado:
+                if k[K_c]:
+                    print "c"
+                    self.posicion1 -= 1
+                    self.rect1.move_ip(10, 10)
+                if k[K_v]:
+                    print "v"
+                    self.posicion1 += 1
+
+                elif k[K_SPACE] and self.player1 == -1:
+                    self.player1 = self.posicion1
+                if k[K_LEFT]:
+                    print "LEFT"
+                    self.posicion2 -= 1
+                if k[K_RIGHT]:
+                    self.posicion2 += 1
+                elif k[K_RETURN] and self.player2 == -1:
+                    self.player2 = self.posicion2
+
+            if self.posicion1 < 0:
+                self.posicion1 = 0
+            elif self.posicion1 > 3:
+                self.posicion1 = 3
+
+            if self.posicion2 < 0:
+                self.posicion2 = 0
+            elif self.posicion2 > 3:
+                self.posicion2 = 3
+
+            # indica si el usuario mantiene pulsada alguna tecla.
+            self.mantiene_pulsado = k[K_c] or k[K_v] or k[K_LEFT] or k[K_RIGHT] or k[K_RETURN] or k[K_SPACE]
 
         reloj1.tick(20)
-        select1.mover(vx, vy)
-        pantalla.fill((200, 200, 200))
-        select1.update(pantalla)
+        pantalla.blit(selectScreen, (0, 0))
+
+        select1.update(pantalla,vx, vy)
         pygame.display.update()
 
     pygame.quit()
