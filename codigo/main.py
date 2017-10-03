@@ -8,6 +8,7 @@ import Fonte
 import subZero
 import Pablo
 import Licha
+import Enzo
 from menu import Menu
 from Time import Time
 import seleccion
@@ -223,16 +224,16 @@ def Pass():
     pass
 
 def selectorPersonaje(a,b):
-    # if(a==0):
-    #     player1=Enzo
+    if(a==0):
+        player1=Enzo
     if(a==1):
         player1=Pablo
     if(a==2):
         player1=Fonte
     if(a==3):
         player1=Licha
-    # if(a==0):
-    #     player2=Enzo
+    if(b==0):
+        player2=Enzo
     if (b == 1):
         player2 = Pablo
     if (b == 2):
