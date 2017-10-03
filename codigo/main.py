@@ -31,7 +31,7 @@ def verificarVida(player1,player2,superficie):
         player1.estado=5
         label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
         superficie.blit(label, (100, 100))
-        
+
 
 def Pelea(a,b):
 
