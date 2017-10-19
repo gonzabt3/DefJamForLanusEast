@@ -34,8 +34,8 @@ def verificarVida(player1,player2,superficie):
         superficie.blit(label, (100, 100))
 
 
-def Pelea(a,b):
-
+# def Pelea(a,b):
+def Pelea(a, b):
     pygame.init()
     pantalla = pygame.display.set_mode((750, 500))
     salir = False
@@ -200,6 +200,7 @@ def Pelea(a,b):
         reloj1.tick(12) #relog
         pantalla.fill((200, 200, 200)) #pantalla blanca
         fondo1.update(pantalla)
+        fondo1.pintarFight(pantalla)
         lifeBar1.update(pantalla)
         lifeBar2.update(pantalla)
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)

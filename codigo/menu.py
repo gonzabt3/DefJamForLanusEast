@@ -34,7 +34,7 @@ class Menu:
             elif k[K_DOWN]:
                 self.seleccionado += 1
                 opcion.play()
-            elif k[K_RETURN]:
+            elif k[K_m]:
                 click.play()
                 # Invoca a la función asociada a la opción.
                 titulo, funcion = self.opciones[self.seleccionado]
@@ -48,7 +48,7 @@ class Menu:
             self.seleccionado = self.total - 1
 
         # indica si el usuario mantiene pulsada alguna tecla.
-        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN]
+        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_m]
 
 
     def imprimir(self, screen):

@@ -9,3 +9,4 @@
 *.iml
 .idea/DefJamForLanusEast.iml
 *.pyc
+.vscode
