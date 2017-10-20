@@ -1,10 +1,13 @@
 import pygame
+pygame.init()
+fightSound=pygame.mixer.Sound("sonidos/otros/fight.wav")
+
 
 class Fight(pygame.sprite.Sprite):
     def __init__(self):
         self.imagenFight = pygame.image.load("imagenes/fight.png").convert_alpha()
         self.rectFight = self.imagenFight.get_rect()
-
+        self.contador=0
 
 class Fondo(pygame.sprite.Sprite):
     def __init__(self):
@@ -17,4 +20,9 @@ class Fondo(pygame.sprite.Sprite):
 
 
     def pintarFight(self,pantalla):
-        pantalla.blit(self.fight.imagenFight,self.fight.rectFight)
+        print "pinrtarFight"
+        if self.fight.contador<=25:
+            if self.fight.contador==0:
+                fightSound.play()
+            pantalla.blit(self.fight.imagenFight,(250,175))
+            self.fight.contador+=1

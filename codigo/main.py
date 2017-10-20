@@ -197,16 +197,20 @@ def Pelea(a, b):
         tiempo2=Time()
 
 
-        reloj1.tick(12) #relog
-        pantalla.fill((200, 200, 200)) #pantalla blanca
+        reloj1.tick(12) #reloj
+        # pantalla.fill((200, 200, 200)) #pantalla blanca
+
         fondo1.update(pantalla)
-        fondo1.pintarFight(pantalla)
+
         lifeBar1.update(pantalla)
         lifeBar2.update(pantalla)
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
+
         tiempo2.update(pantalla)
+
         verificarVida(player1,player2,pantalla)
+        fondo1.pintarFight(pantalla)
         pygame.display.update()
 
     pygame.quit()
