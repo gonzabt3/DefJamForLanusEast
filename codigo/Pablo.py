@@ -57,6 +57,15 @@ muerto3=pygame.image.load("imagenes/pablo/muerto/muerto3.png").convert_alpha()
 muerto4=pygame.image.load("imagenes/pablo/muerto/muerto4.png").convert_alpha()
 imagenMuertoArray=[muerto1,muerto2,muerto3,muerto4]
 
+#imagenes chabon muerto sin cabeza
+muertoScabe1=pygame.image.load("imagenes/pablo/muertoSinCabeza/sinCabeza1.png").convert_alpha()
+muertoScabe2=pygame.image.load("imagenes/pablo/muertoSinCabeza/sinCabeza2.png").convert_alpha()
+muertoScabe3=pygame.image.load("imagenes/pablo/muertoSinCabeza/sinCabeza3.png").convert_alpha()
+muertoScabe4=pygame.image.load("imagenes/pablo/muertoSinCabeza/sinCabeza4.png").convert_alpha()
+
+
+imagenMuertoSinCabezaArray=[muertoScabe1,muertoScabe2,muertoScabe3,muertoScabe4]
+
 # texto
 texto = pygame.image.load("imagenes/pablo/texto.png").convert_alpha()
 

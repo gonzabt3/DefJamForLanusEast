@@ -11,7 +11,7 @@ fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,nombre,imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,lifeBar,player):
+    def __init__(self,nombre,imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,imagenesSinCabeza,lifeBar,player):
 
         # atributos
 
@@ -24,6 +24,7 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesDefensa1 = imagenesDefensa1
         self.imagenesHerido = imagenesHerido
         self.imagenesMuerto = imagenesMuerto
+        self.imagenesSinCabeza = imagenesSinCabeza
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
@@ -165,7 +166,7 @@ class Peleador(pygame.sprite.Sprite):
             elif(self.estado==4):
                 self.muerto(superficie)
         if(self.estado==6):
-            self.muerto(superficie)
+            self.muertoSinCabeza(superficie)
             self.fatality(superficie)
 
         print self.nombre,"estado: ",self.estado
@@ -182,6 +183,10 @@ class Peleador(pygame.sprite.Sprite):
     def muerto(self,superficie):
         self.nextImage(self.imagenesMuerto)
         superficie.blit(self.imagenesMuerto[self.imagenActual], self.rect)
+
+    def muertoSinCabeza(self,superfice):
+        self.nextImage(self.imagenesSinCabeza)
+        superfice.blit(self.imagenesSinCabeza[self.imagenActual],self.rect)
 
     def fatality(self,superficie):
         print "fatality"
