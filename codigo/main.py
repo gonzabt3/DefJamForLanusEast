@@ -16,22 +16,9 @@ from seleccion import Select
 from threading import Timer
 
 
-fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
 
-def verificarVida(player1,player2,superficie):
-    if (player1.life<=-100):
-        player1.estado=4
-        player2.estado=5
-        label=fuente.render("GANADOR PLAYER 2",1,(255,0,0))
-        superficie.blit(label,(100,100))
 
-
-    if (player2.life<-100):
-        player2.estado=4
-        player1.estado=5
-        label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
-        superficie.blit(label, (100, 100))
 
 
 # def Pelea(a,b):
@@ -49,11 +36,11 @@ def Pelea(a, b):
 
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
-    player1 = Peleador(Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
+    player1 = Peleador(Jugador1.nombre,Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
                        Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,Jugador1.imagenMuertoArray,lifeBar1,1)
 
     lifeBar2=LifeBar(Jugador2.texto,Jugador2.cabeza,2)
-    player2 = Peleador(Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
+    player2 = Peleador(Jugador2.nombre,Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
                        Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,Jugador2.imagenMuertoArray,lifeBar2,2)
     fondo1=Fondo()
     vx1, vy1 = 0, 0
@@ -73,7 +60,7 @@ def Pelea(a, b):
 
 
 
-    pygame.mixer.music.play(2)
+    # pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -209,7 +196,7 @@ def Pelea(a, b):
 
         tiempo2.update(pantalla)
 
-        verificarVida(player1,player2,pantalla)
+
         fondo1.pintarFight(pantalla)
         pygame.display.update()
 

@@ -20,7 +20,7 @@ class Fondo(pygame.sprite.Sprite):
 
 
     def pintarFight(self,pantalla):
-        print "pinrtarFight"
+
         if self.fight.contador<=25:
             if self.fight.contador==0:
                 fightSound.play()

@@ -1,7 +1,7 @@
 import pygame
 
 pantalla = pygame.display.set_mode((750, 500))
-
+nombre="licha"
 #imagenes chabon parado
 imagenParado1 = pygame.image.load("imagenes/licha/parado/mov1s.png").convert_alpha()
 imagenParado2 = pygame.image.load("imagenes/licha/parado/mov2s.png").convert_alpha()
