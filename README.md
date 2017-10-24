@@ -4,7 +4,9 @@ PRESS "M" TO SELECT OPTION IN  MENU
 
 
 <------------------PLAYER 1--------------->
+
 C - LEFT 
+
 V - RIGHT
 
 SPACE - SELECT CHARACTER
@@ -14,7 +16,9 @@ W - ATTACK
 E - BLOCK
 
 <------------------PLAYER 2 --------------->
+
 LEFT ARROW - LEFT 
+
 RIGHT ARROW - RIGHT
 
 ENTER - SELECT CHARACTER
