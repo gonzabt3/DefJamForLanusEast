@@ -85,20 +85,23 @@ class Peleador(pygame.sprite.Sprite):
         self.sangreCabezaImagenActual=0
 
     def mover(self, vx, vy):  # metodo que mueve al chabon
-        #muevo los recs de lugar
-        self.rect.move_ip(vx,vy)
-        self.rectPunio.move_ip(vx,vy)
-        self.rectPatada.move_ip(vx,vy)
+        if(self.x+vx>=2 and self.x+vx<=634): #el if es para que no se valla del rango
+            # muevo los recs de lugar
+            self.rect.move_ip(vx,vy)
+            self.rectPunio.move_ip(vx,vy)
+            self.rectPatada.move_ip(vx,vy)
 
-        #actulizo localizacion
-        self.x = self.rect.x
-        self.y = self.rect.y
+            #actulizo localizacion
+            self.x = self.rect.x
+            self.y = self.rect.y
+
+
 
     def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
 
         if(self.estado!=4):
             if(self.estado!=6):
-                print self.nombre,"verifiado"
+                # print self.nombre,"verifiado"
                 self.verificarVida(superficie,oponente)
 
         if( self.estado !=6):
@@ -169,7 +172,7 @@ class Peleador(pygame.sprite.Sprite):
             self.muertoSinCabeza(superficie)
             self.fatality(superficie)
 
-        print self.nombre,"estado: ",self.estado
+        # print self.nombre,"estado: ",self.estado
 
 
     def estarQuieto(self, superficie):  # funcion que anima al personaj cuando esta quieto

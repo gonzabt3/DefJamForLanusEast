@@ -16,11 +16,6 @@ from seleccion import Select
 from threading import Timer
 
 
-
-
-
-
-
 # def Pelea(a,b):
 def Pelea(a, b):
     pygame.init()
@@ -193,7 +188,7 @@ def Pelea(a, b):
         lifeBar2.update(pantalla)
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
-
+        fondo1.pintarFinishHim(pantalla,player1,player2)
         tiempo2.update(pantalla)
 
 
