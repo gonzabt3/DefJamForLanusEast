@@ -1,6 +1,8 @@
 FIGHT GAME LIKE MK
 
-PRESS "M" TO SELECT OPTION IN  MENU 
+PRESS "M" TO SELECT OPTION IN  MENU
+
+
 <------------------PLAYER 1--------------->
 C - LEFT 
 V - RIGHT
