@@ -1,5 +1,7 @@
 FIGHT GAME LIKE MK
 
+Run main.py to play
+
 PRESS "M" TO SELECT OPTION IN  MENU
 
 

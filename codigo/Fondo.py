@@ -18,7 +18,7 @@ class FinishHim(pygame.sprite.Sprite):
 
 class Fondo(pygame.sprite.Sprite):
     def __init__(self):
-        self.imagen=pygame.image.load("imagenes/fondo/enzoHause.gif").convert_alpha()
+        self.imagen=pygame.image.load("imagenes/fondo/mk1.gif").convert_alpha()
         self.rect=self.imagen.get_rect()
         self.fight=Fight()
         self.finishHim=FinishHim()
