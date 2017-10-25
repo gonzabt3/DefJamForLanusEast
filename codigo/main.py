@@ -1,19 +1,17 @@
 import pygame
 
-#importo clases
-from LifeBar import LifeBar
-from Fondo import Fondo
-from Peleador import Peleador
-import Fonte
-import subZero
-import Pablo
-import Licha
-import Enzo
-from menu import Menu
-from Time import Time
+from personajes import Fonte
+from personajes import Licha
+from personajes import Pablo
+
 import seleccion
-from seleccion import Select
-from threading import Timer
+from Fondo import Fondo
+# importo clases
+from LifeBar import LifeBar
+from Peleador import Peleador
+from Time import Time
+from codigo.personajes import Enzo
+from menu import Menu
 
 
 # def Pelea(a,b):
@@ -24,7 +22,7 @@ def Pelea(a, b):
     reloj1 = pygame.time.Clock()
 
     #musica
-    pygame.mixer.music.load("musica.mp3")
+    pygame.mixer.music.load("sonidos/musica.mp3")
 
     (Jugador1,Jugador2)=selectorPersonaje(a,b)
 
@@ -212,7 +210,7 @@ def Pass():
 
 def selectorPersonaje(a,b):
     if(a==0):
-        player1=Enzo
+        player1 = Enzo
     if(a==1):
         player1=Pablo
     if(a==2):
@@ -220,7 +218,7 @@ def selectorPersonaje(a,b):
     if(a==3):
         player1=Licha
     if(b==0):
-        player2=Enzo
+        player2 = Enzo
     if (b == 1):
         player2 = Pablo
     if (b == 2):
@@ -242,7 +240,7 @@ def main():
 
     pygame.font.init()
     screen = pygame.display.set_mode((600, 500))
-    fondo = pygame.image.load("defjam.jpg").convert()
+    fondo = pygame.image.load("imagenes/defjam.jpg").convert()
     menu = Menu(opciones)
 
     while not salir:

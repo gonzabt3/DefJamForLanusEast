@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+pygame.init()
 opcion=pygame.mixer.Sound("sonidos/selectChar.wav")
 click=pygame.mixer.Sound("sonidos/clickChar.wav")
 
@@ -57,7 +58,7 @@ def main():
     selectScreen = pygame.image.load("selectScreen/selectScreen.jpg").convert_alpha()
 
     # musica
-    pygame.mixer.music.load("selectCharacterMusic.mp3")
+    pygame.mixer.music.load("sonidos/selectCharacterMusic.mp3")
 
     select1 = Select(imagen1,1)
     select2 = Select(imagen2,2)
