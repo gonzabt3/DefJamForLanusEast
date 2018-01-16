@@ -241,13 +241,21 @@ def main():
     pygame.font.init()
     screen = pygame.display.set_mode((600, 500))
     fondo = pygame.image.load("imagenes/defjam.jpg").convert()
+    fondoEstudio = pygame.image.load("imagenes/studio.png").convert()
     menu = Menu(opciones)
+    fondoFlag=True
 
     while not salir:
 
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 salir = True
+
+        if(fondoFlag==True):
+            screen.blit(fondoEstudio, (0, 0))
+            pygame.display.flip()
+            pygame.time.delay(3000)
+            fondoFlag=False
 
         screen.blit(fondo, (0, 0))
         menu.actualizar()
