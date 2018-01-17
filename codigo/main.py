@@ -227,6 +227,12 @@ def selectorPersonaje(a,b):
         player2 = Licha
 
     return (player1,player2)
+
+def controles():
+    imagenControles = pygame.image.load("imagenes/controles.png").convert()
+    screen.blit(fondo, (0, 0))
+
+
 def main():
 
 
@@ -234,7 +240,7 @@ def main():
     salir = False
     opciones = [
         ("Jugar", selectPersonaje),
-        ("", Pass),
+        ("Controles",controles),
         ("Salir", salir_del_programa)
     ]
 
