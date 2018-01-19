@@ -5,6 +5,7 @@ from personajes import Licha
 from personajes import Pablo
 
 import seleccion
+
 from Fondo import Fondo
 # importo clases
 from LifeBar import LifeBar
@@ -12,7 +13,7 @@ from Peleador import Peleador
 from Time import Time
 from codigo.personajes import Enzo
 from menu import Menu
-
+import controles
 
 # def Pelea(a,b):
 def Pelea(a, b):
@@ -228,9 +229,8 @@ def selectorPersonaje(a,b):
 
     return (player1,player2)
 
-def controles():
-    imagenControles = pygame.image.load("imagenes/controles.png").convert()
-    screen.blit(fondo, (0, 0))
+def llamadorControl():
+    controles.menuControles()
 
 
 def main():
@@ -240,7 +240,7 @@ def main():
     salir = False
     opciones = [
         ("Jugar", selectPersonaje),
-        ("Controles",controles),
+        ("Controles",llamadorControl),
         ("Salir", salir_del_programa)
     ]
 
