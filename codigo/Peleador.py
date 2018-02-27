@@ -100,15 +100,14 @@ class Peleador(pygame.sprite.Sprite):
 
 
     def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
-        print self.nombre, self.estado
+        #imprime los estados de los pj
+        # print self.nombre, self.estado
+
         if(self.estado!=5):#CREO QUE ESTA AL PEDO ,CREO
             if(self.estado!=4):
                 if(self.estado!=6):
                     # print self.nombre,"verifiado"
                     self.verificarVida(superficie,oponente)
-
-
-
 
             if( self.estado !=6):
                 if(self.estado !=4  ):
