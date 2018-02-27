@@ -183,6 +183,7 @@ class Peleador(pygame.sprite.Sprite):
         if(self.estado==5):
             oponente.estado=6
             self.festejo(superficie)
+            self.cartelGanaro(superficie)
         # print self.nombre,"estado: ",self.estado
 
 
@@ -276,8 +277,6 @@ class Peleador(pygame.sprite.Sprite):
     def verificarVida(self,superficie,oponente):
         if(self.life<=-100):
             self.estado=4
-            label = fuente.render("GANADOR PLAYER 2", 1, (255, 0, 0))
-            superficie.blit(label, (100, 100))
             oponente.estado=5
 
 
@@ -292,3 +291,12 @@ class Peleador(pygame.sprite.Sprite):
     def festejo(self,superfice):
         self.nextImage(self.imagenesFestejo)
         superfice.blit(self.imagenesFestejo[self.imagenActual],self.rect)
+
+
+    def cartelGanaro(self,superficie):
+        if(self.player==1):
+            label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
+            superficie.blit(label, (100, 100))
+        elif(self.player==2):
+            label = fuente.render("GANADOR PLAYER 2", 1, (255, 0, 0))
+            superficie.blit(label, (100, 100))
