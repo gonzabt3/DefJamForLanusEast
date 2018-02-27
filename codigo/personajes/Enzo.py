@@ -65,6 +65,18 @@ muertoScabe5=pygame.image.load("imagenes/enzo/muertoSinCabeza/sinCabeza5.png").c
 
 imagenMuertoSinCabezaArray=[muertoScabe1,muertoScabe2,muertoScabe3,muertoScabe4,muertoScabe5]
 
+#imagenes chabon festejo
+festejo1=pygame.image.load('imagenes/enzo/festejo/fes1.png').convert_alpha()
+festejo2=pygame.image.load('imagenes/enzo/festejo/fes2.png').convert_alpha()
+festejo3=pygame.image.load('imagenes/enzo/festejo/fes3.png').convert_alpha()
+festejo4=pygame.image.load('imagenes/enzo/festejo/fes4.png').convert_alpha()
+festejo5=pygame.image.load('imagenes/enzo/festejo/fes5.png').convert_alpha()
+festejo6=pygame.image.load('imagenes/enzo/festejo/fes6.png').convert_alpha()
+festejo7=pygame.image.load('imagenes/enzo/festejo/fes7.png').convert_alpha()
+festejo8=pygame.image.load('imagenes/enzo/festejo/fes8.png').convert_alpha()
+
+imagenFestejo=[festejo1,festejo2,festejo3,festejo4,festejo5,festejo6,festejo7,festejo8]
+
 
 # texto
 texto = pygame.image.load("imagenes/enzo/texto.png").convert_alpha()

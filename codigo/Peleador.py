@@ -11,7 +11,7 @@ fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,nombre,imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,imagenesSinCabeza,lifeBar,player):
+    def __init__(self,nombre,imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,imagenesSinCabeza,lifeBar,player,imagenesFestejo):
 
         # atributos
 
@@ -25,6 +25,7 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesHerido = imagenesHerido
         self.imagenesMuerto = imagenesMuerto
         self.imagenesSinCabeza = imagenesSinCabeza
+        self.imagenesFestejo = imagenesFestejo
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
@@ -99,11 +100,15 @@ class Peleador(pygame.sprite.Sprite):
 
 
     def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
-        if(self.estado!=7):#CREO QUE ESTA AL PEDO ,CREO
+        print self.nombre, self.estado
+        if(self.estado!=5):#CREO QUE ESTA AL PEDO ,CREO
             if(self.estado!=4):
                 if(self.estado!=6):
                     # print self.nombre,"verifiado"
                     self.verificarVida(superficie,oponente)
+
+
+
 
             if( self.estado !=6):
                 if(self.estado !=4  ):
@@ -123,7 +128,7 @@ class Peleador(pygame.sprite.Sprite):
                                 punioBloqueoSonido.play()
                                 oponente.life = oponente.life - 1
                             if (self.rectPunio.colliderect(oponente.rect) and oponente.estado ==4):
-                                print "entro"
+                                # print "entro"
                                 self.cambiarEstado(oponente,6)
                                 oponente.banderaPelea=False
                                 self.banderaPelea=False
@@ -175,6 +180,9 @@ class Peleador(pygame.sprite.Sprite):
                 self.contadorMuerto+=1
                 if(self.contadorMuerto==100):#este if esta para para la pelea y lanzar el menu para volver para atras
                     print "PELEA TERMINADA"
+        if(self.estado==5):
+            oponente.estado=6
+            self.festejo(superficie)
         # print self.nombre,"estado: ",self.estado
 
 
@@ -195,7 +203,7 @@ class Peleador(pygame.sprite.Sprite):
         superfice.blit(self.imagenesSinCabeza[self.imagenActual],self.rect)
 
     def fatality(self,superficie):
-        print "fatality"
+        # print "fatality"
         self.sangreCabezaImagenActual+=1
         if self.sangreCabezaImagenActual > (len(self.sangreCabeza) - 1):  # si se fue de rango que lo ponga en 0
             self.sangreCabezaImagenActual = 0
@@ -270,6 +278,7 @@ class Peleador(pygame.sprite.Sprite):
             self.estado=4
             label = fuente.render("GANADOR PLAYER 2", 1, (255, 0, 0))
             superficie.blit(label, (100, 100))
+            oponente.estado=5
 
 
     def cambiarEstado(self,oponente,estado):
@@ -277,3 +286,9 @@ class Peleador(pygame.sprite.Sprite):
             oponente.estado=estado
         if(oponente.estado==4 and estado==6):
             oponente.estado=6
+
+
+
+    def festejo(self,superfice):
+        self.nextImage(self.imagenesFestejo)
+        superfice.blit(self.imagenesFestejo[self.imagenActual],self.rect)

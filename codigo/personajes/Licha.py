@@ -69,6 +69,23 @@ muertoScabe5=pygame.image.load("imagenes/licha/muertoSinCabeza/sinCabeza5.png").
 
 imagenMuertoSinCabezaArray=[muertoScabe1,muertoScabe2,muertoScabe3,muertoScabe4,muertoScabe5]
 
+#imagenes chabon festejo
+festejo1=pygame.image.load('imagenes/licha/festejo/fes1.png').convert_alpha()
+festejo2=pygame.image.load('imagenes/licha/festejo/fes2.png').convert_alpha()
+festejo3=pygame.image.load('imagenes/licha/festejo/fes3.png').convert_alpha()
+festejo4=pygame.image.load('imagenes/licha/festejo/fes4.png').convert_alpha()
+festejo5=pygame.image.load('imagenes/licha/festejo/fes5.png').convert_alpha()
+festejo6=pygame.image.load('imagenes/licha/festejo/fes6.png').convert_alpha()
+festejo7=pygame.image.load('imagenes/licha/festejo/fes7.png').convert_alpha()
+festejo8=pygame.image.load('imagenes/licha/festejo/fes8.png').convert_alpha()
+festejo9=pygame.image.load('imagenes/licha/festejo/fes9.png').convert_alpha()
+festejo10=pygame.image.load('imagenes/licha/festejo/fes10.png').convert_alpha()
+festejo11=pygame.image.load('imagenes/licha/festejo/fes11.png').convert_alpha()
+festejo12=pygame.image.load('imagenes/licha/festejo/fes12.png').convert_alpha()
+festejo13=pygame.image.load('imagenes/licha/festejo/fes13.png').convert_alpha()
+festejo14=pygame.image.load('imagenes/licha/festejo/fes14.png').convert_alpha()
+imagenFestejo=[festejo1,festejo2,festejo3,festejo4,festejo5,festejo6,festejo7,festejo8,festejo9,festejo10,festejo11,festejo12,festejo13,festejo14]
+
 # texto
 texto = pygame.image.load("imagenes/licha/texto.png").convert_alpha()
 

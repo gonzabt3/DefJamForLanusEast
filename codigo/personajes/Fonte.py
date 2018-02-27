@@ -69,6 +69,17 @@ muertoScabe5=pygame.image.load("imagenes/fonte2/muertoSinCabeza/sinCabeza5.png")
 
 imagenMuertoSinCabezaArray=[muertoScabe1,muertoScabe2,muertoScabe3,muertoScabe4,muertoScabe5]
 
+#imagenes chabon festejo
+festejo1=pygame.image.load('imagenes/fonte2/festejo/fes1.png').convert_alpha()
+festejo2=pygame.image.load('imagenes/fonte2/festejo/fes2.png').convert_alpha()
+festejo3=pygame.image.load('imagenes/fonte2/festejo/fes3.png').convert_alpha()
+festejo4=pygame.image.load('imagenes/fonte2/festejo/fes4.png').convert_alpha()
+festejo5=pygame.image.load('imagenes/fonte2/festejo/fes5.png').convert_alpha()
+festejo6=pygame.image.load('imagenes/fonte2/festejo/fes6.png').convert_alpha()
+festejo7=pygame.image.load('imagenes/fonte2/festejo/fes7.png').convert_alpha()
+festejo8=pygame.image.load('imagenes/fonte2/festejo/fes8.png').convert_alpha()
+
+imagenFestejo=[festejo1,festejo2,festejo3,festejo4,festejo5,festejo6,festejo7,festejo8]
 
 # texto
 texto = pygame.image.load("imagenes/fonte2/texto.png").convert_alpha()

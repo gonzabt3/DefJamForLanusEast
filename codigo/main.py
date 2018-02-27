@@ -31,11 +31,11 @@ def Pelea(a, b):
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
     player1 = Peleador(Jugador1.nombre,Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
-                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,Jugador1.imagenMuertoArray,Jugador1.imagenMuertoSinCabezaArray,lifeBar1,1)
+                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,Jugador1.imagenMuertoArray,Jugador1.imagenMuertoSinCabezaArray,lifeBar1,1,Jugador1.imagenFestejo)
 
     lifeBar2=LifeBar(Jugador2.texto,Jugador2.cabeza,2)
     player2 = Peleador(Jugador2.nombre,Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
-                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,Jugador2.imagenMuertoArray,Jugador2.imagenMuertoSinCabezaArray,lifeBar2,2)
+                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,Jugador2.imagenMuertoArray,Jugador2.imagenMuertoSinCabezaArray,lifeBar2,2,Jugador2.imagenFestejo)
     fondo1=Fondo()
     vx1, vy1 = 0, 0
     vx2, vy2 = 0, 0
