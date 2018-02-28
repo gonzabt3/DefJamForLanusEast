@@ -176,9 +176,6 @@ class Peleador(pygame.sprite.Sprite):
             if(self.estado==6):
                 self.muertoSinCabeza(superficie)
                 self.fatality(superficie)
-                self.contadorMuerto+=1
-                if(self.contadorMuerto==100):#este if esta para para la pelea y lanzar el menu para volver para atras
-                    print "PELEA TERMINADA"
         if(self.estado==5):
             oponente.estado=6
             self.festejo(superficie)

@@ -14,7 +14,9 @@ from Time import Time
 from codigo.personajes import Enzo
 from menu import Menu
 import controles
+import menuRetry
 
+contadorMuerto=0
 # def Pelea(a,b):
 def Pelea(a, b):
     pygame.init()
@@ -52,6 +54,12 @@ def Pelea(a, b):
     fightMove2 = False
     defenseMove2 = False
 
+    #menu de retry
+    opciones = [
+        ("Elegir Personaje", selectPersonaje),
+        ("Salir", salir_del_programa)
+    ]
+    menuReinicio = menuRetry.MenuRetry(opciones)
 
 
     # pygame.mixer.music.play(2)
@@ -189,9 +197,16 @@ def Pelea(a, b):
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
         fondo1.pintarFinishHim(pantalla,player1,player2)
         tiempo2.update(pantalla)
-
-
         fondo1.pintarFight(pantalla)
+
+        if(player1.estado==6 or player2.estado==6):
+            global contadorMuerto
+            contadorMuerto += 1
+
+            if (contadorMuerto >= 75):  # este if esta para para la pelea y lanzar el menu para volver para atras
+                menuReinicio.actualizar()
+                menuReinicio.imprimir(pantalla)
+
         pygame.display.update()
 
     pygame.quit()
