@@ -1,21 +1,22 @@
 import pygame
 
-#importo clases
-from LifeBar import LifeBar
-from Fondo import Fondo
-from Peleador import Peleador
-import Fonte
-import subZero
-import Pablo
-import Licha
-import Enzo
-from menu import Menu
-from Time import Time
+from personajes import Fonte
+from personajes import Licha
+from personajes import Pablo
+
 import seleccion
-from seleccion import Select
-from threading import Timer
 
+from Fondo import Fondo
+# importo clases
+from LifeBar import LifeBar
+from Peleador import Peleador
+from Time import Time
+from codigo.personajes import Enzo
+from menu import Menu
+import controles
+import menuRetry
 
+contadorMuerto=0
 # def Pelea(a,b):
 def Pelea(a, b):
     pygame.init()
@@ -24,7 +25,7 @@ def Pelea(a, b):
     reloj1 = pygame.time.Clock()
 
     #musica
-    pygame.mixer.music.load("musica.mp3")
+    pygame.mixer.music.load("sonidos/musica.mp3")
 
     (Jugador1,Jugador2)=selectorPersonaje(a,b)
 
@@ -32,11 +33,11 @@ def Pelea(a, b):
 
     lifeBar1 = LifeBar(Jugador1.texto,Jugador1.cabeza,1)
     player1 = Peleador(Jugador1.nombre,Jugador1.imagenParadoArray,Jugador1.imagenMovimientoArray,Jugador1.imagenPunioArray,
-                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,Jugador1.imagenMuertoArray,Jugador1.imagenMuertoSinCabezaArray,lifeBar1,1)
+                       Jugador1.imagenPatadaArray,Jugador1.imagenDefensa1Array,Jugador1.imagenHeridoArray,Jugador1.imagenMuertoArray,Jugador1.imagenMuertoSinCabezaArray,lifeBar1,1,Jugador1.imagenFestejo)
 
     lifeBar2=LifeBar(Jugador2.texto,Jugador2.cabeza,2)
     player2 = Peleador(Jugador2.nombre,Jugador2.imagenParadoArray, Jugador2.imagenMovimientoArray, Jugador2.imagenPunioArray,
-                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,Jugador2.imagenMuertoArray,Jugador2.imagenMuertoSinCabezaArray,lifeBar2,2)
+                       Jugador2.imagenPatadaArray, Jugador2.imagenDefensa1Array,Jugador2.imagenHeridoArray,Jugador2.imagenMuertoArray,Jugador2.imagenMuertoSinCabezaArray,lifeBar2,2,Jugador2.imagenFestejo)
     fondo1=Fondo()
     vx1, vy1 = 0, 0
     vx2, vy2 = 0, 0
@@ -53,6 +54,12 @@ def Pelea(a, b):
     fightMove2 = False
     defenseMove2 = False
 
+    #menu de retry
+    opciones = [
+        ("Elegir Personaje", selectPersonaje),
+        ("Salir", salir_del_programa)
+    ]
+    menuReinicio = menuRetry.MenuRetry(opciones)
 
 
     # pygame.mixer.music.play(2)
@@ -190,9 +197,16 @@ def Pelea(a, b):
         player2.update(pantalla, vx2, vy2, fightMove2, cuatro_apretada, cinco_apretada, defenseMove2, seis_apretada, lifeBar2,player1)
         fondo1.pintarFinishHim(pantalla,player1,player2)
         tiempo2.update(pantalla)
-
-
         fondo1.pintarFight(pantalla)
+
+        if(player1.estado==6 or player2.estado==6):
+            global contadorMuerto
+            contadorMuerto += 1
+
+            if (contadorMuerto >= 75):  # este if esta para para la pelea y lanzar el menu para volver para atras
+                menuReinicio.actualizar()
+                menuReinicio.imprimir(pantalla)
+
         pygame.display.update()
 
     pygame.quit()
@@ -212,7 +226,7 @@ def Pass():
 
 def selectorPersonaje(a,b):
     if(a==0):
-        player1=Enzo
+        player1 = Enzo
     if(a==1):
         player1=Pablo
     if(a==2):
@@ -220,7 +234,7 @@ def selectorPersonaje(a,b):
     if(a==3):
         player1=Licha
     if(b==0):
-        player2=Enzo
+        player2 = Enzo
     if (b == 1):
         player2 = Pablo
     if (b == 2):
@@ -229,6 +243,11 @@ def selectorPersonaje(a,b):
         player2 = Licha
 
     return (player1,player2)
+
+def llamadorControl():
+    controles.menuControles()
+
+
 def main():
 
 
@@ -236,20 +255,28 @@ def main():
     salir = False
     opciones = [
         ("Jugar", selectPersonaje),
-        ("", Pass),
+        ("Controles",llamadorControl),
         ("Salir", salir_del_programa)
     ]
 
     pygame.font.init()
     screen = pygame.display.set_mode((600, 500))
-    fondo = pygame.image.load("defjam.jpg").convert()
+    fondo = pygame.image.load("imagenes/defjam.jpg").convert()
+    fondoEstudio = pygame.image.load("imagenes/studio.png").convert()
     menu = Menu(opciones)
+    fondoFlag=True
 
     while not salir:
 
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 salir = True
+
+        if(fondoFlag==True):
+            screen.blit(fondoEstudio, (0, 0))
+            pygame.display.flip()
+            pygame.time.delay(3000)
+            fondoFlag=False
 
         screen.blit(fondo, (0, 0))
         menu.actualizar()

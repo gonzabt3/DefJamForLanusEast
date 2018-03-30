@@ -11,7 +11,7 @@ fuente=pygame.font.Font("fuentesMK/mk2.ttf",50)
 
 
 class Peleador(pygame.sprite.Sprite):
-    def __init__(self,nombre,imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,imagenesSinCabeza,lifeBar,player):
+    def __init__(self,nombre,imagenesQuieto, imagenesMovimiento, imagenesPunio1, imagenesPatada1, imagenesDefensa1,imagenesHerido,imagenesMuerto,imagenesSinCabeza,lifeBar,player,imagenesFestejo):
 
         # atributos
 
@@ -25,10 +25,12 @@ class Peleador(pygame.sprite.Sprite):
         self.imagenesHerido = imagenesHerido
         self.imagenesMuerto = imagenesMuerto
         self.imagenesSinCabeza = imagenesSinCabeza
+        self.imagenesFestejo = imagenesFestejo
         self.imagenActual = 0
         self.imagen = self.imagenesQuieto[self.imagenActual]
         self.rect = self.imagen.get_rect()
         self.rect.inflate_ip(-20,-20)
+        self.contadorMuerto=0 #esta variable la pongo para contar el tiempo para mostrar la fatality antes que terminar la pelea,VILLERIADA
 
         self.player=player
         if(player==1):
@@ -68,7 +70,7 @@ class Peleador(pygame.sprite.Sprite):
             self.rectPatada = pygame.Rect((552, 285), (10, 10))
 
         self.move = False
-        self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido,4=muerto,5=ganador,6=fatality
+        self.estado = 0  # 0=inactivo,1=ataque,2=defensa,3=herido,4=muerto,5=ganador,6=fatality,7=pelea terminada
         self.life = 100
         self.lifeBar = lifeBar
 
@@ -98,80 +100,86 @@ class Peleador(pygame.sprite.Sprite):
 
 
     def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
+        #imprime los estados de los pj
+        # print self.nombre, self.estado
 
-        if(self.estado!=4):
-            if(self.estado!=6):
-                # print self.nombre,"verifiado"
-                self.verificarVida(superficie,oponente)
+        if(self.estado!=5):#CREO QUE ESTA AL PEDO ,CREO
+            if(self.estado!=4):
+                if(self.estado!=6):
+                    # print self.nombre,"verifiado"
+                    self.verificarVida(superficie,oponente)
 
-        if( self.estado !=6):
-            if(self.estado !=4  ):
-                if (fightMove == True):  # PREGUNTO SI hay un movimiento de pelea
-                    if (golpe == True):  # punio1
-                        self.estado = 1
-                        self.punio1(superficie)
+            if( self.estado !=6):
+                if(self.estado !=4  ):
+                    if (fightMove == True):  # PREGUNTO SI hay un movimiento de pelea
+                        if (golpe == True):  # punio1
+                            self.estado = 1
+                            self.punio1(superficie)
 
-                        if(self.rectPunio.colliderect(oponente.rect) and oponente.estado!=2 and oponente.estado!=4):
-                            oponente.lifeBar.actualizarBar(3)
-                            punio1Sonido.play()
-                            self.cambiarEstado(oponente,3)
-                            oponente.life=oponente.life-3
+                            if(self.rectPunio.colliderect(oponente.rect) and oponente.estado!=2 and oponente.estado!=4):
+                                oponente.lifeBar.actualizarBar(3)
+                                punio1Sonido.play()
+                                self.cambiarEstado(oponente,3)
+                                oponente.life=oponente.life-3
 
-                        if (self.rectPunio.colliderect(oponente.rect) and oponente.estado == 2):
-                            oponente.lifeBar.actualizarBar(1)
-                            punioBloqueoSonido.play()
-                            oponente.life = oponente.life - 1
-                        if (self.rectPunio.colliderect(oponente.rect) and oponente.estado ==4):
-                            print "entro"
-                            self.cambiarEstado(oponente,6)
-                            oponente.banderaPelea=False
-                            self.banderaPelea=False
+                            if (self.rectPunio.colliderect(oponente.rect) and oponente.estado == 2):
+                                oponente.lifeBar.actualizarBar(1)
+                                punioBloqueoSonido.play()
+                                oponente.life = oponente.life - 1
+                            if (self.rectPunio.colliderect(oponente.rect) and oponente.estado ==4):
+                                # print "entro"
+                                self.cambiarEstado(oponente,6)
+                                oponente.banderaPelea=False
+                                self.banderaPelea=False
 
-                    if (patada == True):  # patada1
-                        self.patada2(superficie)
-                        if (self.rectPatada.colliderect(oponente.rect) and oponente.estado != 2 and oponente.estado!=4):
-                            oponente.lifeBar.actualizarBar(5)
-                            patadaSonido.play()
-                            self.cambiarEstado(oponente,3)
-                            oponente.life = oponente.life - 5
-                        if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 2):
-                            oponente.lifeBar.actualizarBar(2)
-                            patadaBloqueoSonido.play()
-                            oponente.life = oponente.life - 2
-                        if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 4):
-                            print "entro"
-                            self.cambiarEstado(oponente,6)
-                elif (defenseMove == True):
-                    if (defensa == True):
-                        self.defensa1(superficie)
-                elif(self.estado==3 and self.estado!=6):
-                    self.herido(superficie)
-                    self.estado=0
+                        if (patada == True):  # patada1
+                            self.patada2(superficie)
+                            if (self.rectPatada.colliderect(oponente.rect) and oponente.estado != 2 and oponente.estado!=4):
+                                oponente.lifeBar.actualizarBar(5)
+                                patadaSonido.play()
+                                self.cambiarEstado(oponente,3)
+                                oponente.life = oponente.life - 5
+                            if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 2):
+                                oponente.lifeBar.actualizarBar(2)
+                                patadaBloqueoSonido.play()
+                                oponente.life = oponente.life - 2
+                            if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 4):
+                                print "entro"
+                                self.cambiarEstado(oponente,6)
+                    elif (defenseMove == True):
+                        if (defensa == True):
+                            self.defensa1(superficie)
+                    elif(self.estado==3 and self.estado!=6):
+                        self.herido(superficie)
+                        self.estado=0
 
-                elif (vx == 0 and vy == 0 ):  # si la velocida esta en 0 no se mueve
-                    self.move = False  # me fijo si se esta moviendo
-                    self.estarQuieto(superficie)
-                    # pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
-                else:  # si la velocidad no esta en 0 se mueve
-                    self.move = True
-                    self.mover(vx, vy)
-                    #direccion al caminar
-                    if(self.player==1):
-                        if (vx > 0):
-                            self.moverse(superficie)
-                        if (vx < 0):
-                            self.moverseAtras(superficie)
-                    if (self.player ==2):
-                        if (vx < 0):
-                            self.moverse(superficie)
-                        if (vx > 0):
-                            self.moverseAtras(superficie)
-            elif(self.estado==4):
-                self.muerto(superficie)
-        if(self.estado==6):
-            self.muertoSinCabeza(superficie)
-            self.fatality(superficie)
-
+                    elif (vx == 0 and vy == 0 ):  # si la velocida esta en 0 no se mueve
+                        self.move = False  # me fijo si se esta moviendo
+                        self.estarQuieto(superficie)
+                        # pygame.draw.rect(superficie,(255,0,0),self.rect) # line para pintar recs
+                    else:  # si la velocidad no esta en 0 se mueve
+                        self.move = True
+                        self.mover(vx, vy)
+                        #direccion al caminar
+                        if(self.player==1):
+                            if (vx > 0):
+                                self.moverse(superficie)
+                            if (vx < 0):
+                                self.moverseAtras(superficie)
+                        if (self.player ==2):
+                            if (vx < 0):
+                                self.moverse(superficie)
+                            if (vx > 0):
+                                self.moverseAtras(superficie)
+                elif(self.estado==4):
+                    self.muerto(superficie)
+            if(self.estado==6):
+                self.muertoSinCabeza(superficie)
+                self.fatality(superficie)
+        if(self.estado==5):
+            oponente.estado=6
+            self.festejo(superficie)
+            self.cartelGanaro(superficie)
         # print self.nombre,"estado: ",self.estado
 
 
@@ -192,7 +200,7 @@ class Peleador(pygame.sprite.Sprite):
         superfice.blit(self.imagenesSinCabeza[self.imagenActual],self.rect)
 
     def fatality(self,superficie):
-        print "fatality"
+        # print "fatality"
         self.sangreCabezaImagenActual+=1
         if self.sangreCabezaImagenActual > (len(self.sangreCabeza) - 1):  # si se fue de rango que lo ponga en 0
             self.sangreCabezaImagenActual = 0
@@ -265,8 +273,7 @@ class Peleador(pygame.sprite.Sprite):
     def verificarVida(self,superficie,oponente):
         if(self.life<=-100):
             self.estado=4
-            label = fuente.render("GANADOR PLAYER 2", 1, (255, 0, 0))
-            superficie.blit(label, (100, 100))
+            oponente.estado=5
 
 
     def cambiarEstado(self,oponente,estado):
@@ -274,3 +281,18 @@ class Peleador(pygame.sprite.Sprite):
             oponente.estado=estado
         if(oponente.estado==4 and estado==6):
             oponente.estado=6
+
+
+
+    def festejo(self,superfice):
+        self.nextImage(self.imagenesFestejo)
+        superfice.blit(self.imagenesFestejo[self.imagenActual],self.rect)
+
+
+    def cartelGanaro(self,superficie):
+        if(self.player==1):
+            label = fuente.render("GANADOR PLAYER 1", 1, (255, 0, 0))
+            superficie.blit(label, (100, 100))
+        elif(self.player==2):
+            label = fuente.render("GANADOR PLAYER 2", 1, (255, 0, 0))
+            superficie.blit(label, (100, 100))
