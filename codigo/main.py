@@ -62,7 +62,7 @@ def Pelea(a, b):
     menuReinicio = menuRetry.MenuRetry(opciones)
 
 
-    # pygame.mixer.music.play(2)
+    pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
