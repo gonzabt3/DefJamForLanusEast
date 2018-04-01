@@ -16,6 +16,7 @@ from menu import Menu
 import controles
 import menuRetry
 
+mortalKombatVoz=pygame.mixer.Sound("sonidos/mortalKombarVoz.wav")
 contadorMuerto=0
 # def Pelea(a,b):
 def Pelea(a, b):
@@ -217,7 +218,7 @@ def salir_del_programa():
     sys.exit(0)
 
 def selectPersonaje():
-
+    mortalKombatVoz.play()
     a,b=seleccion.main()
     Pelea(a,b)
 
