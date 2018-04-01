@@ -62,7 +62,7 @@ def Pelea(a, b):
     menuReinicio = menuRetry.MenuRetry(opciones)
 
 
-    # pygame.mixer.music.play(2)
+    pygame.mixer.music.play(2)
     while salir != True:  # LOOP PRINCIPAL
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -261,6 +261,7 @@ def main():
 
     pygame.font.init()
     screen = pygame.display.set_mode((600, 500))
+    pygame.display.set_caption("Def Jam Fight for Lanus Este")
     fondo = pygame.image.load("imagenes/defjam.jpg").convert()
     fondoEstudio = pygame.image.load("imagenes/studio.png").convert()
     menu = Menu(opciones)

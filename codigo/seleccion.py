@@ -4,6 +4,7 @@ from pygame.locals import *
 pygame.init()
 opcion=pygame.mixer.Sound("sonidos/selectChar.wav")
 click=pygame.mixer.Sound("sonidos/clickChar.wav")
+voces=[pygame.mixer.Sound("sonidos/enzoVoz.wav"),pygame.mixer.Sound("sonidos/pabloVoz.wav"),pygame.mixer.Sound("sonidos/fonteVoz.wav"),pygame.mixer.Sound("sonidos/lichaVoz.wav")]
 
 class Select(pygame.sprite.Sprite):
     def __init__(self, imagen,player):
@@ -100,6 +101,7 @@ def main():
                         print "barra"
                         seleccionar1=False
                         seleccionarOpcion1=posicion1
+                        sonarVoz(seleccionarOpcion1)
                 if seleccionar2==True:
                     if k[K_LEFT]:
                         opcion.play()
@@ -116,6 +118,7 @@ def main():
                         print "enter"
                         seleccionar2=False
                         seleccionarOpcion2=posicion2
+                        sonarVoz(seleccionarOpcion2)
 
             if posicion1 < 0:
                 posicion1 = 0
@@ -144,4 +147,5 @@ def main():
 
     pygame.quit()
 
-
+def sonarVoz(numeroJugador):
+    voces[numeroJugador].play()
