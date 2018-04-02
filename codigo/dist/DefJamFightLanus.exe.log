@@ -3,3 +3,29 @@ Traceback (most recent call last):
   File "DefJamFightLanus.py", line 285, in main
   File "menu.pyo", line 69, in imprimir
 pygame.error: Text has zero width
+Traceback (most recent call last):
+  File "DefJamFightLanus.py", line 12, in <module>
+  File "zipextimporter.pyo", line 82, in load_module
+  File "Peleador.pyo", line 10, in <module>
+IOError: unable to read font filename
+Traceback (most recent call last):
+  File "DefJamFightLanus.py", line 12, in <module>
+  File "zipextimporter.pyo", line 82, in load_module
+  File "Peleador.pyo", line 10, in <module>
+IOError: unable to read font filename
+Traceback (most recent call last):
+  File "DefJamFightLanus.py", line 292, in <module>
+  File "DefJamFightLanus.py", line 284, in main
+  File "menu.pyo", line 42, in actualizar
+  File "DefJamFightLanus.py", line 222, in selectPersonaje
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "DefJamFightLanus.py", line 292, in <module>
+  File "DefJamFightLanus.py", line 285, in main
+  File "menu.pyo", line 69, in imprimir
+pygame.error: Text has zero width
+Traceback (most recent call last):
+  File "DefJamFightLanus.py", line 292, in <module>
+  File "DefJamFightLanus.py", line 285, in main
+  File "menu.pyo", line 69, in imprimir
+pygame.error: Text has zero width
