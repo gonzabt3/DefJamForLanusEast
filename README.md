@@ -1,6 +1,6 @@
 FIGHT GAME LIKE MK
 
-Run main.py to play
+Run DefJamFightLanus.exe into dist to play
 
 PRESS "M" TO SELECT OPTION IN  MENU
 
