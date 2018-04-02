@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "DefJamFightLanus.py", line 292, in <module>
+  File "DefJamFightLanus.py", line 285, in main
+  File "menu.pyo", line 69, in imprimir
+pygame.error: Text has zero width

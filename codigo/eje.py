@@ -50,7 +50,7 @@ class pygame2exe(
 class BuildExe:
     def __init__(self):
         # Name of starting .py
-        self.script = "main.py"
+        self.script = "DefJamFightLanus.py"
 
         # Name of program
         self.project_name = "Def Jam Fight for Lanus East"
@@ -73,7 +73,7 @@ class BuildExe:
         self.project_description = "Fight game like MK,make it with love"
 
         # Icon file (None will use pygame default icon)
-        self.icon_file = None
+        self.icon_file = "iconDf.ico"
 
         # Extra files/dirs copied to game
         self.extra_datas = ["fuentesMK","imagenes","personajes","selectScreen","sonidos"]
