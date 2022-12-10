@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 fightSound=pygame.mixer.Sound("sonidos/otros/fight.wav")
-finishHimSound=pygame.mixer.Sound("sonidos/otros/finishhim.mp3")
+finishHimSound=pygame.mixer.Sound("sonidos/otros/finishhim.wav")
 
 
 class Fight(pygame.sprite.Sprite):

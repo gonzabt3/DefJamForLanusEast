@@ -191,7 +191,7 @@ def Pelea(a, b):
         # pantalla.fill((200, 200, 200)) #pantalla blanca
 
         fondo1.update(pantalla)
-
+        manageFigth(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1)
         lifeBar1.update(pantalla)
         lifeBar2.update(pantalla)
         player1.update(pantalla, vx1, vy1,fightMove1,q_apretada,w_apretada,defenseMove1,e_apretada,lifeBar1,player2)
@@ -226,6 +226,7 @@ def Pass():
     pass
 
 def selectorPersonaje(a,b):
+#we can improve this code making an array with the characters an passing as the index the id player
     if(a==0):
         player1 = Enzo
     if(a==1):
@@ -250,13 +251,10 @@ def llamadorControl():
 
 
 def main():
-
-
-
     salir = False
     opciones = [
         ("Jugar", selectPersonaje),
-        ("Controles",llamadorControl),
+        ("Controles", llamadorControl),
         ("Salir", salir_del_programa)
     ]
 
@@ -266,15 +264,13 @@ def main():
     fondo = pygame.image.load("imagenes/defjam.jpg").convert()
     fondoEstudio = pygame.image.load("imagenes/studio.png").convert()
     menu = Menu(opciones)
-    fondoFlag=True
+    fondoFlag = True
 
     while not salir:
-
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 salir = True
-
-        if(fondoFlag==True):
+        if(fondoFlag == True):
             screen.blit(fondoEstudio, (0, 0))
             pygame.display.flip()
             pygame.time.delay(3000)

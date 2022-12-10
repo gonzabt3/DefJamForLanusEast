@@ -86,19 +86,16 @@ def main():
                 if seleccionar1==True:
                     if k[K_c]:
                         opcion.play()
-                        print "c"
                         posicion1 -= 1
                         direccion1=0
                         apretada1=True
                     if k[K_v]:
                         opcion.play()
-                        print "v"
                         posicion1 += 1
                         direccion1 = 1
                         apretada1 = True
                     elif k[K_SPACE]:
                         click.play()
-                        print "barra"
                         seleccionar1=False
                         seleccionarOpcion1=posicion1
                         sonarVoz(seleccionarOpcion1)
@@ -115,7 +112,6 @@ def main():
                         apretada2 = True
                     elif k[K_RETURN]:
                         click.play()
-                        print "enter"
                         seleccionar2=False
                         seleccionarOpcion2=posicion2
                         sonarVoz(seleccionarOpcion2)
@@ -135,7 +131,6 @@ def main():
             mantiene_pulsado = k[K_c] or k[K_v] or k[K_LEFT] or k[K_RIGHT] or k[K_RETURN] or k[K_SPACE]
 
             if(seleccionar1==False and seleccionar2==False):
-                print "return"
                 return (seleccionarOpcion1,seleccionarOpcion2)
 
         reloj1.tick(8)

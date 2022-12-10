@@ -6,7 +6,7 @@
 
 import pygame
 from pygame.locals import *
-
+pygame.init()
 opcion=pygame.mixer.Sound("sonidos/opcion.wav")
 click=pygame.mixer.Sound("sonidos/click.wav")
 
@@ -38,7 +38,7 @@ class Menu:
                 click.play()
                 # Invoca a la función asociada a la opción.
                 titulo, funcion = self.opciones[self.seleccionado]
-                print "Selecciona la opción '%s'." %(titulo)
+                print ("Selecciona la opción '%s'." %(titulo))
                 funcion()
 
         # procura que el cursor esté entre las opciones permitidas
@@ -73,42 +73,42 @@ class Menu:
 
 
 def comenzar_nuevo_juego():
-    print " Función que muestra un nuevo juego."
+    print ("Función que muestra un nuevo juego.")
 
 def mostrar_opciones():
-    print " Función que muestra otro menú de opciones."
+    print (" Función que muestra otro menú de opciones.")
 
 def creditos():
-    print " Función que muestra los creditos del programa."
+    print ("Función que muestra los creditos del programa.")
 
 def salir_del_programa():
     import sys
-    print " Gracias por utilizar este programa."
+    print ("Gracias por utilizar este programa.")
     sys.exit(0)
 
 
-# if __name__ == '__main__':
-#
-#     salir = False
-#     opciones = [
-#         ("Jugar", comenzar_nuevo_juego),
-#         ("Salir", salir_del_programa)
-#         ]
-#
-#     pygame.font.init()
-#     screen = pygame.display.set_mode((600, 500))
-#     fondo = pygame.image.load("defjam.jpg").convert()
-#     menu = Menu(opciones)
-#
-#     while not salir:
-#
-#         for e in pygame.event.get():
-#             if e.type == QUIT:
-#                 salir = True
-#
-#         screen.blit(fondo, (0, 0))
-#         menu.actualizar()
-#         menu.imprimir(screen)
-#
-#         pygame.display.flip()
-#         pygame.time.delay(10)
+    if __name__ == '__main__':
+
+     salir = False
+     opciones = [
+         ("Jugar", comenzar_nuevo_juego),
+         ("Salir", salir_del_programa)
+         ]
+
+     pygame.font.init()
+     screen = pygame.display.set_mode((600, 500))
+     fondo = pygame.image.load("defjam.jpg").convert()
+     menu = Menu(opciones)
+
+     while not salir:
+
+         for e in pygame.event.get():
+             if e.type == QUIT:
+                 salir = True
+
+         screen.blit(fondo, (0, 0))
+         menu.actualizar()
+         menu.imprimir(screen)
+
+         pygame.display.flip()
+         pygame.time.delay(10)

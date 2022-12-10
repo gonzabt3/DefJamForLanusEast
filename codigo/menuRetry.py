@@ -38,7 +38,6 @@ class MenuRetry:
                 click.play()
                 # Invoca a la función asociada a la opción.
                 titulo, funcion = self.opciones[self.seleccionado]
-                print "Selecciona la opción '%s'." % (titulo)
                 funcion()
 
         # procura que el cursor esté entre las opciones permitidas

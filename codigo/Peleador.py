@@ -97,6 +97,7 @@ class Peleador(pygame.sprite.Sprite):
             self.x = self.rect.x
             self.y = self.rect.y
 
+    def action(self):
 
 
     def update(self, superficie, vx, vy, fightMove, golpe, patada, defenseMove, defensa, lifeBar,oponente):
@@ -144,7 +145,6 @@ class Peleador(pygame.sprite.Sprite):
                                 patadaBloqueoSonido.play()
                                 oponente.life = oponente.life - 2
                             if (self.rectPatada.colliderect(oponente.rect) and oponente.estado == 4):
-                                print "entro"
                                 self.cambiarEstado(oponente,6)
                     elif (defenseMove == True):
                         if (defensa == True):
